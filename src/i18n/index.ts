@@ -1,26 +1,14 @@
-import i18next from 'i18next';
+import { localeFrom, browser } from '@nanostores/i18n'
+import { persistentAtom } from '@nanostores/persistent'
+import zh from './zh';
+import en from './en';
 
-export default async function initI18n() {
-    return i18next.init({
-        lng: 'en', // if you're using a language detector, do not define the lng option
-        debug: true,
-        resources: {
-            en: {
-                translation: {
-                    "home": "Home",
-                    'blog': 'Blog',
-                    'project': 'Project',
-                    'about': 'About'
-                }
-            },
-            zh: {
-                translation: {
-                    "home": "首页",
-                    'blog': '博客',
-                    'project': '项目',
-                    'about': '关于'
-                }
-            }
-        }
-    });
-}
+export const localeSettings = persistentAtom<string>('locale')
+
+export const locale = localeFrom(
+  localeSettings,
+  browser({
+      available: ['en', 'zh'],
+      fallback: 'en'
+  })
+)

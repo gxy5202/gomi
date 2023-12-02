@@ -1,18 +1,18 @@
 ---
-import '../i18n';
-import Header from '../components/Header';
+import { Image } from "astro:assets";
+import leftBg from "../assets/images/docs-left.png";
+import rightBg from "../assets/images/docs-right.png";
+import Header from "../components/Header";
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
-
-
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -20,10 +20,20 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<style>
+			html,
+			body {
+				height: 100%;
+			}
+		</style>
 	</head>
 	<body>
-		<Header client:visible></Header>
-		<slot />
+		<Header client:visible/>
+		<main class="max-w-\[1280px\] dark text-foreground bg-background" >
+			<slot />
+		</main>
+		<Image class="gomi-bg gomi-bg-left" src={leftBg} alt=""/>
+		<Image class="gomi-bg gomi-bg-right" src={rightBg} alt=""/>
 	</body>
 </html>
 <style is:global>
@@ -42,6 +52,30 @@ const { title } = Astro.props;
 		font-family: system-ui, sans-serif;
 		background: #13151a;
 		background-size: 224px;
+	}
+
+	.gomi-bg {
+		position: fixed;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	.gomi-bg-left {
+		transform: translate(-20%, 0%);
+	}
+
+	.gomi-bg-right {
+		transform: translate(50%, -50%);
+	}
+
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 100%;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
 	}
 	code {
 		font-family:

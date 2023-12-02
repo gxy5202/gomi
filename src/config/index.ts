@@ -1,20 +1,24 @@
 import { t } from 'i18next';
 
-export const Router = {
-    Home: {
-       name: t('home'),
-       path: ''
-    },
-    Blog: {
-        name: t('blog'),
-        path: 'bloglist/'
-    },
-    Project: {
-        name: t('project'),
-        path: 'projectlist/'
-    },
-    About: {
-        name: t('about'),
-        path: 'about/'
-    }  
+console.log(t('home'));
+
+export function getRouter() {
+    return {
+        Home: {
+            name: 'home',
+            path: ''
+        },
+        Blog: {
+            name: 'blog',
+            path: 'bloglist/'
+        },
+        Project: {
+            name: 'project',
+            path: 'projectlist/'
+        },
+        About: {
+            name: 'about',
+            path: 'about/'
+        }
+    }
 }

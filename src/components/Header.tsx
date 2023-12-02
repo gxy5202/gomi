@@ -1,24 +1,31 @@
 import { useState } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import { Sunny, Moon, Language } from "@ricons/ionicons5";
-import { Router } from '../config';
-import { color } from "framer-motion";
-import initI18n from '../i18n';
+import { useTranslation } from 'react-i18next';
+import { getRouter } from '../config';
+
 
 /**
  * Home page
  * @returns 
  */
 export default function Header() {
+    const { t, i18n } = useTranslation();
     const [mode, setMode] = useState<Number>(0);
+    const [lanKeys, setLankeys] = useState<Array<string>>([]);
     
-    console.log(Object.values(Router))
+    const changeLan = (lan) => {
+        setLankeys([lan]);
+        document.cookie = `locale=${lan}`;
+        i18n.changeLanguage(lan);
+    }
+
     const updateMode = () => {
         setMode(+!mode);
     }
 
     return (<NextUIProvider>
-        <Navbar isBordered>
+        <Navbar isBordered maxWidth="xl">
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
@@ -31,8 +38,8 @@ export default function Header() {
 
             <NavbarContent className="hidden sm:flex gap-6" justify="center">
                 {
-                    Object.values(Router).map((v, i) => <NavbarItem key={i}><Link color="foreground" href={`/${v.path}`}>
-                        {v.name}
+                    Object.values(getRouter()).map((v, i) => <NavbarItem key={i}><Link color="foreground" href={`/${v.path}`}>
+                        {t(v.name)}
                     </Link></NavbarItem>)
                 }
             </NavbarContent>
@@ -62,9 +69,12 @@ export default function Header() {
                         <DropdownMenu
                             aria-label="Dropdown language"
                             variant="light"
+                            selectionMode="single"
+                            selectedKeys={lanKeys}
+                            onAction={changeLan}
                         >
-                            <DropdownItem key="Chinese">中文</DropdownItem>
-                            <DropdownItem key="English">English</DropdownItem>
+                            <DropdownItem key="zh">中文</DropdownItem>
+                            <DropdownItem key="en">English</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     {/* <Button as={Link} color="warning" href="#" variant="flat">
@@ -74,7 +84,7 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarMenu>
-                {Object.values(Router).map((v, i) => (
+                {Object.values(getRouter()).map((v, i) => (
                     <NavbarMenuItem key={i}>
                         <Link
                             className="w-full"
@@ -82,7 +92,7 @@ export default function Header() {
                             href={`/${v.path}`}
                             size="lg"
                         >
-                            {v.name}
+                            {t(v.name)}
                         </Link>
                     </NavbarMenuItem>
                 ))}

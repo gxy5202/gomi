@@ -1,23 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import  Home from '../components/Home.tsx';
+import Layout from "../layouts/Layout.astro";
+import Home from "../components/Home.tsx";
 ---
+
 <Layout title="Gomi.site.">
-	<main>
-		<Home client:visible></Home>
-	</main>
+	<Home client:visible />
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
+	
 	.astro-a {
 		position: absolute;
 		top: -32px;
@@ -44,7 +35,10 @@ import  Home from '../components/Home.tsx';
 	.instructions {
 		margin-bottom: 2rem;
 		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		background: linear-gradient(
+			rgba(var(--accent-dark), 66%),
+			rgba(var(--accent-dark), 33%)
+		);
 		padding: 1.5rem;
 		border-radius: 8px;
 	}
