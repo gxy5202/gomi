@@ -14,6 +14,11 @@ export default defineConfig({
   adapter: node({
     mode: "standalone"
   }),
+  server: {
+      port: 3000,
+      host: true,
+      serverEntry: 'entry.mjs'
+  },
   markdown: {
     // 示例：在 Markdown 中使用 prism 进行语法高亮显示
     syntaxHighlight: 'prism',
