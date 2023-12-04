@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useMemo, useCallback, useEffect } from 'react';
 import { NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import { Sunny, Moon } from "@ricons/ionicons5";
 import { useStore } from '@nanostores/react';
@@ -11,26 +11,15 @@ import { getRouter } from '../config';
  * @returns 
  */
 export default function Header() {
-    const theme = useStore($themeState);
-
-    useEffect(() => {
-        $themeState.subscribe(theme => {
-            document.querySelector('html').setAttribute('data-theme', theme)
-        });
-
-        return () => $themeState.off();
-    });
+    const currentTheme = useStore($themeState);
 
     const updateMode = useCallback(() => {
-        if (theme === ThemeType.DARK) {
-            $themeState.set(ThemeType.LIGHT)
-        } else {
-            $themeState.set(ThemeType.DARK)
-        }
-    }, [theme]);
+        const newTheme = currentTheme === ThemeType.DARK ? ThemeType.LIGHT : ThemeType.DARK;
+        $themeState.set(newTheme);
+    }, [currentTheme]);
 
     return (<NextUIProvider>
-        <Navbar maxWidth="xl">
+        <Navbar className="nav-bar" maxWidth="xl">
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
@@ -53,7 +42,7 @@ export default function Header() {
                 <NavbarItem className="lg:flex">
                     <Button isIconOnly variant="light" aria-label="dark mode" onClick={updateMode}>
                         {
-                            theme === ThemeType.LIGHT ? <Sunny className="w-6 h-6"></Sunny> : <Moon className="w-6 h-6"></Moon>
+                            currentTheme === ThemeType.LIGHT ? <Sunny className="w-6 h-6"></Sunny> : <Moon className="w-6 h-6"></Moon>
                         }
                     </Button>
                     {/* <Link href="#">Login</Link> */}

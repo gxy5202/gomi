@@ -1,9 +1,11 @@
 ---
 import { Image } from "astro:assets";
+import { ViewTransitions } from 'astro:transitions';
 import leftBg from "../assets/images/docs-left.png";
 import rightBg from "../assets/images/docs-right.png";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 
 interface Props {
 	title: string;
@@ -13,7 +15,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -27,10 +29,23 @@ const { title } = Astro.props;
 				height: 100%;
 			}
 		</style>
+		<ViewTransitions></ViewTransitions>
 	</head>
 	<body>
+		<script>
+			import { ThemeType, $themeState } from '../store/theme';
+			import { $loadingState } from '../store/loading';
+			$themeState.subscribe(theme => {
+				document.querySelector('html').setAttribute('data-theme', theme)
+        		document.body.setAttribute('class', theme);
+				setTimeout(() => {
+					$loadingState.set(false);
+				}, 400);
+			})
+		</script>
+		<Loading client:visible/>
 		<div class="flex flex-col justify-between h-screen">
-			<Header client:visible />
+			<Header client:visible/>
 			<main class="max-w-\[1280px\] flex-1">
 				<slot />
 			</main>
@@ -49,6 +64,10 @@ const { title } = Astro.props;
 		background-size: 224px;
 	}
 
+	.nav-bar {
+		position: fixed;
+	}
+
 	.gomi-bg {
 		position: fixed;
 		pointer-events: none;
@@ -65,6 +84,7 @@ const { title } = Astro.props;
 
 	main {
 		margin: auto;
+		margin-top: 64px;
 		padding: 1rem;
 		width: 100%;
 		max-width: calc(100% - 2rem);

@@ -4,8 +4,6 @@ import { useEffect, useRef } from "react";
 import { LogoGithub, LogoLinkedin, LogoTwitter } from "@ricons/ionicons5";
 import './style.less';
 
-const emoji = ['👋', '🤪', '😅', '😜', '🥰'];
-
 const buttons = [
     {
         icon: <LogoGithub className="w-5 h-5"/>,
@@ -29,13 +27,11 @@ const buttons = [
  * @returns 
  */
 export default function Home() {
-    useEffect(() => {
-    });
     return (<NextUIProvider>
         <div className="home">
-            <div className="gomi-home-info mt-28 text-left pl-2">
+            <div className="gomi-home-info ms:mt-24 mt-64 text-left pl-2">
                 <h1 className="info-text text-3xl">Hi, this is Gomi</h1>
-                <p className="text-1 text-gray-400">I'm currently a front-end developer and I'm creating a life that I love.</p>
+                <p className="text-1 text-gray-400">A front end developer who is creating the life he loves.</p>
                 <div className="flex justify-start mt-4">
                     {
                         buttons.map((item) => <Button className="mr-2" key={item.text} size="sm" startContent={item.icon}><a href={item.url} target="_blank">{item.text}</a></Button>)
@@ -43,6 +39,5 @@ export default function Home() {
                 </div>
             </div>
         </div>
-        {/* <Button>hhh</Button> */}
     </NextUIProvider>)
 }

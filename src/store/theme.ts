@@ -1,4 +1,4 @@
-import { atom } from 'nanostores'
+import { persistentAtom } from '@nanostores/persistent'
 
 export enum ThemeType {
     DARK = 'dark',
@@ -7,4 +7,4 @@ export enum ThemeType {
 
 export type Theme = 'dark' | 'light';
 
-export const $themeState = atom<Theme>('dark');
+export const $themeState = persistentAtom<Theme>(ThemeType.DARK);

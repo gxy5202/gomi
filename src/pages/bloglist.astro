@@ -8,14 +8,9 @@ import { getCollection, getEntry } from 'astro:content';
 // 示例：检索 `src/content/blog/**`
 const allBlogPosts = await getCollection('blog');
 
-console.log(allBlogPosts);
-
 ---
 <Layout title="Gomi.site.">
 	<BlogList client:visible data={allBlogPosts}></BlogList>
-	<!-- {
-		allBlogPosts.map((item) => <div>{item.data.title}</div>)
-	} -->
 </Layout>
 
 <style>
