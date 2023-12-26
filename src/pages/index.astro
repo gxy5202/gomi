@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Home from "../components/home/Home.tsx";
 ---
 
-<Layout title="Gomi.site">
-	<Home client:visible />
+<Layout title="Gomi" transition:persist>
+	<Home />
 </Layout>
 
 <style>

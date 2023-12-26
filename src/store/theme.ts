@@ -7,4 +7,10 @@ export enum ThemeType {
 
 export type Theme = 'dark' | 'light';
 
-export const $themeState = persistentAtom<Theme>(ThemeType.DARK);
+export function updateTheme(theme: Theme, storage) {
+    storage.setItem('theme', theme);
+}
+
+export function getTheme(storage) {
+    return storage.getItem('theme') ?? ThemeType.DARK;
+}

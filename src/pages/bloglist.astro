@@ -9,8 +9,8 @@ import { getCollection, getEntry } from 'astro:content';
 const allBlogPosts = await getCollection('blog');
 
 ---
-<Layout title="Gomi.site.">
-	<BlogList client:visible data={allBlogPosts}></BlogList>
+<Layout title="Gomi" transition:persist>
+	<BlogList client:load data={allBlogPosts}></BlogList>
 </Layout>
 
 <style>

@@ -5,19 +5,19 @@ console.log(t('home'));
 export function getRouter() {
     return {
         Home: {
-            name: 'home',
+            name: 'Home',
             path: ''
         },
         Blog: {
-            name: 'blog',
-            path: 'bloglist/'
+            name: 'Blog',
+            path: 'bloglist'
         },
         Project: {
-            name: 'project',
+            name: 'Project',
             path: 'projectlist/'
         },
         About: {
-            name: 'about',
+            name: 'About',
             path: 'about/'
         }
     }

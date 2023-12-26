@@ -1,16 +1,12 @@
 import { Card, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
 import { Link } from '@nextui-org/react';
-import { useEffect, useRef } from "react";
-import { LogoGithub, LogoLinkedin, LogoTwitter } from "@ricons/ionicons5";
+
 
 /**
  * Home page
  * @returns 
  */
 export default function Bloglist(props) {
-    useEffect(() => {
-        console.log(props);
-    }, [props]);
     return (<NextUIProvider>
         <div className="bloglist">
             {props.data?.map((item) => <div className="mt-4 max-w-3xl" key={item.data.title}><Link color="foreground" href={`/${item.slug}`}>

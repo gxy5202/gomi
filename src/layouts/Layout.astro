@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import { ViewTransitions } from 'astro:transitions';
 import leftBg from "../assets/images/docs-left.png";
 import rightBg from "../assets/images/docs-right.png";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import Footer from "../components/Footer";
-import Loading from "../components/Loading";
+import ThemeBtn from "../components/header/ThemeBtn";
+
 
 interface Props {
 	title: string;
@@ -29,24 +29,37 @@ const { title } = Astro.props;
 				height: 100%;
 			}
 		</style>
-		<ViewTransitions></ViewTransitions>
 	</head>
 	<body>
-		<script>
-			import { ThemeType, $themeState } from '../store/theme';
-			import { $loadingState } from '../store/loading';
-			$themeState.subscribe(theme => {
-				document.querySelector('html').setAttribute('data-theme', theme)
-        		document.body.setAttribute('class', theme);
-				setTimeout(() => {
-					$loadingState.set(false);
-				}, 400);
-			})
+		<script is:inline>
+			const theme = (() => {
+					if (
+						typeof localStorage !== "undefined" &&
+						localStorage.getItem("theme")
+					) {
+						return localStorage.getItem("theme");
+					}
+					if (
+						window.matchMedia("(prefers-color-scheme: dark)")
+							.matches
+					) {
+						return "dark";
+					}
+					return "light";
+				})();
+
+				document.querySelector("html").setAttribute("data-theme", theme);
+        		document.body.setAttribute("class", theme);
+
+				window.localStorage.setItem("theme", theme);
+			
 		</script>
-		<Loading client:visible/>
+		<!-- <Loading client:visible/> -->
 		<div class="flex flex-col justify-between h-screen">
-			<Header client:visible/>
-			<main class="max-w-\[1280px\] flex-1">
+			<Header client:visible>
+				<ThemeBtn client:only></ThemeBtn>
+			</Header>
+			<main class="max-w-\[1024px\] flex-1" transition:persist>
 				<slot />
 			</main>
 			<Footer />
