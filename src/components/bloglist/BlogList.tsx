@@ -1,15 +1,22 @@
-import { Card, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
-import { Link } from '@nextui-org/react';
-
+import { useMemo } from 'react';
+import { PER_PAGE_NUM } from '../../config';
+import { Button, Link, Card, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
 
 /**
  * Home page
  * @returns 
  */
 export default function Bloglist(props) {
+    const { data, currentPage, totalPages } = props;
+
+    const bloglist = useMemo(() => {
+        const list = data.slice((currentPage - 1) * PER_PAGE_NUM, currentPage * PER_PAGE_NUM)
+        return list;
+    }, [data, currentPage, totalPages]);
+
     return (<NextUIProvider>
         <div className="bloglist">
-            {props.data?.map((item) => <div className="mt-4 max-w-3xl" key={item.data.title}><Link color="foreground" href={`/${item.slug}`}>
+            {bloglist?.map((item) => <div className="mt-4 max-w-3xl" key={item.data.title}><Link color="foreground" href={`/${item.slug}`}>
                 <Card className="py-4">
                     <CardBody className="overflow-visible py-2">
                         <div className="flex justify-start">
@@ -29,6 +36,22 @@ export default function Bloglist(props) {
                     </CardBody>
                 </Card>
             </Link></div>)}
+        </div>
+        <div className="flex gap-2">
+            <Button
+                href={'/bloglist?page=' + (currentPage > 1 ? currentPage - 1 : currentPage)}
+                as={Link}
+                variant="bordered"
+            >
+                Previous
+            </Button>
+            <Button
+                href={'/bloglist?page=' + (currentPage < totalPages ? currentPage + 1 : currentPage)}
+                as={Link}
+                variant="bordered"
+            >
+                Next
+            </Button>
         </div>
     </NextUIProvider>)
 }

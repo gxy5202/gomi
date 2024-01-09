@@ -1,7 +1,3 @@
-import { t } from 'i18next';
-
-console.log(t('home'));
-
 export function getRouter() {
     return {
         Home: {
@@ -22,3 +18,5 @@ export function getRouter() {
         }
     }
 }
+
+export const PER_PAGE_NUM = 4;
