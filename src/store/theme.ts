@@ -1,5 +1,3 @@
-import { persistentAtom } from '@nanostores/persistent'
-
 export enum ThemeType {
     DARK = 'dark',
     LIGHT = 'light'
