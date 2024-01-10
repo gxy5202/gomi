@@ -60,11 +60,11 @@ export default function Header(props) {
                                 />
                             </DropdownTrigger>
                             <DropdownMenu aria-label="Profile Actions" variant="flat">
-                                <DropdownItem key="profile" className="h-14 gap-2">
+                                {/* <DropdownItem key="profile" className="h-14 gap-2">
                                     <p className="font-semibold">Signed in as</p>
                                     <p className="font-semibold">{ }</p>
-                                </DropdownItem>
-                                <DropdownItem key="analytics">Dashboard</DropdownItem>
+                                </DropdownItem> */}
+                                <DropdownItem key="analytics" href='/dashboard'>Dashboard</DropdownItem>
                                 <DropdownItem key="configurations">Configurations</DropdownItem>
                                 <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
                                 <DropdownItem key="logout" color="danger" href='/api/auth/signout'>

@@ -1,11 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Home from "../components/home/Home.tsx";
-import Edit from "./Edit.astro";
+import Editor from "../components/Editor";
 ---
 
 <Layout title="Gomi" transition:persist>
-	<Edit></Edit>
+	<Editor client:load></Editor>
 </Layout>
 
 <style>
