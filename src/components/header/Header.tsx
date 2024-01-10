@@ -1,8 +1,5 @@
 import { useMemo, useCallback, useEffect } from 'react';
-import { Image, NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
-import { Sunny, Moon } from "@ricons/ionicons5";
-import { useStore } from '@nanostores/react';
-import { getTheme, ThemeType, updateTheme } from '../../store/theme';
+import { Image, NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button, Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 import { getRouter } from '../../config';
 
 
@@ -48,6 +45,37 @@ export default function Header(props) {
             </NavbarMenu>
 
             <NavbarContent className="sm:flex gap-4" justify="end">
+                <NavbarItem>
+                    {
+                        props.isLogin ? <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar
+                                    isBordered
+                                    as="button"
+                                    className="transition-transform"
+                                    color="secondary"
+                                    name="Jason Hughes"
+                                    size="sm"
+                                    src="/src/assets/images/user.png"
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                <DropdownItem key="profile" className="h-14 gap-2">
+                                    <p className="font-semibold">Signed in as</p>
+                                    <p className="font-semibold">{ }</p>
+                                </DropdownItem>
+                                <DropdownItem key="analytics">Dashboard</DropdownItem>
+                                <DropdownItem key="configurations">Configurations</DropdownItem>
+                                <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+                                <DropdownItem key="logout" color="danger" href='/api/auth/signout'>
+                                    Log Out
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown> : <Button as={Link} size="small" href="/signin" variant="flat">
+                            Sign In
+                        </Button>
+                    }
+                </NavbarItem>
                 <NavbarItem className="lg:flex">
                     {props.children}
                     {/* <Button className="theme-btn" isIconOnly variant="light" aria-label="dark mode">
