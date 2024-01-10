@@ -1,6 +1,8 @@
 import { useMemo, useCallback, useEffect } from 'react';
 import { Image, NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button, Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 import { getRouter } from '../../config';
+import logo from '../../assets/images/logo.png';
+import user from '../../assets/images/user.png';
 
 
 /**
@@ -14,12 +16,12 @@ export default function Header(props) {
                 className="sm:hidden"
             />
             <NavbarBrand className="sm:hidden">
-                <Image removeWrapper className="object-cover rounded-md" src="/src/assets/images/logo.png" width={40} />
+                <Image removeWrapper className="object-cover rounded-md" src={logo.src} width={40} />
             </NavbarBrand>
 
             <NavbarContent className="hidden sm:flex gap-6" justify="center">
                 <NavbarBrand>
-                    <Image removeWrapper className="object-cover rounded-md" src="/src/assets/images/logo.png" width={40} />
+                    <Image removeWrapper className="object-cover rounded-md" src={logo.src} width={40} />
                 </NavbarBrand>
 
                 {
@@ -56,7 +58,7 @@ export default function Header(props) {
                                     color="secondary"
                                     name="Jason Hughes"
                                     size="sm"
-                                    src="/src/assets/images/user.png"
+                                    src={user.src}
                                 />
                             </DropdownTrigger>
                             <DropdownMenu aria-label="Profile Actions" variant="flat">
