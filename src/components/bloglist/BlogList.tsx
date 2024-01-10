@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { PER_PAGE_NUM } from '../../config';
-import { Button, Link, Card, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
+import { Button, Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
 
 /**
  * Home page
@@ -16,19 +16,19 @@ export default function Bloglist(props) {
 
     return (<NextUIProvider>
         <div className="bloglist">
-            {bloglist?.map((item) => <div className="mt-4 max-w-3xl" key={item.data.title}><Link color="foreground" href={`/${item.slug}`}>
+            {bloglist?.map((item) => <div className="mt-4 max-w-2xl" key={item.data.title}><Link color="foreground" href={`/${item.slug}`}>
                 <Card className="py-4">
                     <CardBody className="overflow-visible py-2">
                         <div className="flex justify-start">
-                            <div className="mr-4">
+                            <div className="mr-4 w-[200px] h-[100px] bg-red">
                                 <Image
+                                    removeWrapper
                                     alt={item.data.title}
-                                    className="object-cover rounded-xl"
+                                    className="object-cover rounded-xl w-full h-full"
                                     src={item.data.cover.src}
-                                    width={220}
                                 />
                             </div>
-                            <div>
+                            <div className="w-4/5">
                                 <h4 className="font-bold text-large">{item.data.title}</h4>
                                 <p>{item.data.publishDate.toDateString()}</p>
                             </div>
@@ -37,9 +37,10 @@ export default function Bloglist(props) {
                 </Card>
             </Link></div>)}
         </div>
-        <div className="flex gap-2">
+        <div className="blog-pagenation flex gap-2 mt-4">
             <Button
                 href={'/bloglist?page=' + (currentPage > 1 ? currentPage - 1 : currentPage)}
+                isDisabled={currentPage === 1}
                 as={Link}
                 variant="bordered"
             >
@@ -47,6 +48,7 @@ export default function Bloglist(props) {
             </Button>
             <Button
                 href={'/bloglist?page=' + (currentPage < totalPages ? currentPage + 1 : currentPage)}
+                isDisabled={currentPage === totalPages}
                 as={Link}
                 variant="bordered"
             >

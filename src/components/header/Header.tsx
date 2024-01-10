@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect } from 'react';
-import { NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
+import { Image, NextUIProvider, Navbar, NavbarBrand, NavbarMenuToggle, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import { Sunny, Moon } from "@ricons/ionicons5";
 import { useStore } from '@nanostores/react';
 import { getTheme, ThemeType, updateTheme } from '../../store/theme';
@@ -16,8 +16,15 @@ export default function Header(props) {
             <NavbarMenuToggle
                 className="sm:hidden"
             />
+            <NavbarBrand className="sm:hidden">
+                <Image removeWrapper className="object-cover rounded-md" src="/src/assets/images/logo.png" width={40} />
+            </NavbarBrand>
 
             <NavbarContent className="hidden sm:flex gap-6" justify="center">
+                <NavbarBrand>
+                    <Image removeWrapper className="object-cover rounded-md" src="/src/assets/images/logo.png" width={40} />
+                </NavbarBrand>
+
                 {
                     Object.values(getRouter()).map((v, i) => <NavbarItem key={i}><Link color="foreground" href={`/${v.path}`}>
                         {v.name}
