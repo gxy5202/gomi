@@ -1,6 +1,6 @@
 ---
+import Login from "../components/Login";
 import Layout from "../layouts/Layout.astro";
-import Signin from "../components/Signin";
 
 const { cookies, redirect } = Astro;
 
@@ -15,5 +15,5 @@ if (accessToken && refreshToken) {
 <Layout title="Sign in">
     <h1>Sign in</h1>
     <p>New here? <a href="/register">Create an account</a></p>
-    <Signin client:load></Signin>
+    <Login client:load></Login>
 </Layout>

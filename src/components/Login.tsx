@@ -2,10 +2,10 @@ import React from "react";
 import { Card, NextUIProvider, Button, Input, CardBody } from "@nextui-org/react";
 
 /**
- * Home page
+ * Log in
  * @returns 
  */
-export default function Signin() {
+export default function Login(props) {
     const [email, setEmail] = React.useState("");
 
     const validateEmail = (value) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);

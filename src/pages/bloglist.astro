@@ -10,10 +10,7 @@ const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
 // 需要集合的名称作为参数。
 // 示例：检索 `src/content/blog/**`
 const allBlogPosts = await getCollection('blog');
-
 const totalPages = Math.ceil(allBlogPosts.length / PER_PAGE_NUM);
-
-
 ---
 <Layout title="Gomi" transition:persist>
 	<BlogList client:load data={allBlogPosts} currentPage={currentPage} totalPages={totalPages}></BlogList>
