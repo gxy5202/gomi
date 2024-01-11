@@ -22,6 +22,9 @@ export default defineConfig({
       host: true,
       serverEntry: 'entry.mjs'
   },
+  devToolbar: {
+    enabled: false
+  },
   markdown: {
     // 示例：在 Markdown 中使用 prism 进行语法高亮显示
     syntaxHighlight: 'prism',

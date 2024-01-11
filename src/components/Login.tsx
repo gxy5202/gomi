@@ -52,7 +52,6 @@ export default function Login(props) {
                     </CardBody>
                 </Card>
             </div>
-
         </form>
     </NextUIProvider>)
 }

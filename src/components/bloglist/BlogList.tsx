@@ -29,7 +29,7 @@ export default function Bloglist(props) {
                                 />
                             </div>
                             <div className="w-4/5">
-                                <h4 className="font-bold text-large">{item.data.title}</h4>
+                                <h4 className="font-bold text-large max-[600px]:text-sm">{item.data.title}</h4>
                                 <p>{item.data.publishDate.toDateString()}</p>
                             </div>
                         </div>

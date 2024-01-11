@@ -1,86 +1,90 @@
 ---
 tags: [tech]
-title: Video Roll升级，一款小众浏览器插件优化你看视频的体验
-publishDate: 2021-07-08
-cover: "../../assets/images/content-2/content-2.webp"
+title: 开阔眼界的好工具，一文教你使用Wappalzer来学习全栈技术
+publishDate: 2022-08-14
+cover: "../../assets/images/content-3/content-3.webp"
 ---
 ## 一、前言
-首先介绍下**[Video Roll](https://gomi.site/VideoRoll)**，这款浏览器插件能够帮助你旋转、缩放、调整比例和镜像翻转任意网页中的HTML5视频。目前已经有超过**1000+**用户在使用，完全开源，零差评。
-![image.png](/img/bVc2vh9)
+我先抛出一个问题，市面上这么多相关的技术和方案，如果让你来设计一套Web系统，你会怎么选择？
 
-![image.png](/img/bVc2vid)
+大家都知道，一个完整的**高可用、高性能**的Web系统本身的构成是比较复杂的，除了我们熟知的前端部分，比如**静态网页生成器、JS库、UI框架、监控工具**等，还有**Web Server、云服务、CDN内容分发、代理服务、HTTP缓存与加速**等等。
 
-那么我们来介绍下这款小众插件究竟是做什么的。
+有人会说，我会按照我最熟悉的方案来设计，这样风险最小。
+有人会说，我会先Google一些成熟的方案，然后分别预研一下，使用效果最好的方案。
+有人会说，我会直接找技术大牛，他做的一定没问题。
 
-## 二、Video Roll解决的问题
-首先我整理了一下PC平台的网络视频存在哪些问题:
+其实只要结果是好的，最终落地成功，效果甚好，那么技术方案怎么选都没有错。
 
-#### **1.视频方向不对**
-大部分视频网站默认的比例是**16：9**的视频，按理说是横屏播放的，也就是宽占16，高只占9。但是我们有时会看到下面这种视频：
+但是如果我告诉你，现在市面上各大网站的技术栈我都知道个百分之六七十，前端框架用的什么，服务器用的什么，后端用的什么，CDN用的什么等等，你会先听听我的建议么？我相信你会的。
 
-![image.png](/img/bVc2vh4)
+[**Wappalzer**](https://www.wappalyzer.com/)就是这样一款强大的浏览器插件，它的用户超过100万，并且它的使用超级简单，只需要点一下，就能看到当前你访问的网站所使用的技术栈。先让我们看看**Segmentfault**用了哪些技术吧。
 
-这样的视频很明显应该是个竖屏视频，宽高比例正好相反，但是由于作者在上传视频时没有调整方向，所以就出现了上面这种现象。于是乎弹幕就有很多人说脖子都歪疼了😂。当然也可能存在镜像翻转的问题，但镜像一般不太影响观看体验。横竖相反的情况是最影响观看体验的。
+![image.png](../../assets/images/content-3/content-3-1.webp)
 
-#### **2.视频拉伸** 
-除了方向问题，某些视频还存在比例失衡的问题。也就是所谓的被过度拉伸，导致看上去视频内容变形。
-![image.png](/img/bVc2MUi)
+## 二、发现你不知道的技术
+那么第二个问题来了，如果你是个有经验的架构师，那么Wappalzer对你的帮助可能不大。但是如果你只是一个前端工程师或者后端工程师，现在你要担负起全栈的工作，负责自己不太熟悉的那部分内容，并且要给出技术方案，可能是个头疼的问题。因为对于前端工程师来说，服务器用什么？后端语言用什么？数据库用什么？搜索引擎用什么？云服务用亚马逊、微软的还是阿里、腾讯的？这一些列问题对于很少接触服务端的人来说，都是一个不小的挑战。因为好多技术我都没听过，更何谈选择呢？
 
-#### **3.视频黑边**
-视频黑边通常是视频内容没完全占满容器导致的，这种是否影响观看体验取决于视频的内容以及黑边大小。有些视频内容区域太小，黑边太大。
-![image.png](/img/bVc2MUj)
+这时候**Wappalzer**就派上用场了，你只需要不停地打开各个网站，看下它给你列出的技术清单，你便很快能知晓一些你不熟悉的技术。
 
-## 三、Video Roll的解决方案
-由于现代浏览器的视频基本都是基于HTML5的`<video>`标签来实现的，你所能见到的各大视频网站，例如Youtube、Bilibili、Viemo、Tiktok等等，无一例外。那么我们就直接从Video标签上下手。
+接下来我们测试测试，看看是否真的有用。
 
-相信做过前端的同学应该都会想到，直接使用CSS的`transform`属性就能解决这些问题。没错，Video Roll就是直接通过`transform`搞定的。Video Roll通过`transform`中3d和2d两种变形效果同时存在的方式，同时加上一些简单的算法，实现了完美的解决方案。
+首先打开Github，看看他们用到的一些技术
 
-#### **1.方向问题**
-方向直接通过`transform: rotate`就能搞定，在使用层面，用户只需要点一下即可。
-![image.png](/img/bVc2MUu)
+![image.png](../../assets/images/content-3/content-3-2.webp)
 
-虽然原理简单，但是存在一个问题，就是旋转后视频的大小还是没有发生变化，由于视频外有一层容器，那么视频肯定就会被遮挡而无法显示完全，就像下面的效果。
-![image.png](/img/bVc2MUm)
+OK，从它给出的技术清单来看，我不知道的有**lit-html**、**Amazon S3**、**Turbo**这三个技术，于是我们只需要点进去看看即可。以**Turbo**为例，点进去之后，Wappalyzer简单的介绍了Turbo是干什么的，并且给出了官网链接。我知道了它是一个用来快速构建Web应用的JS框架。那么这个没听过的技术是不是很冷门呢？接着往下翻，它还列出了访问浏览最高的10个使用该技术的网站列表。
 
-所以我们还需要使用`scale`属性来进行一定的缩放，而这个缩放的数值就需要通过视频大小和容器大小来进行一定的计算而得到。通过`videoWidth`和`videoHeight`以及`offsetWidth`和`offsetHeight`来进行宽高比例缩放的计算。经过计算后，最终的效果如下：
-![image.png](/img/bVc2MUo)
+![image.png](../../assets/images/content-3/content-3-3.webp)
 
-由于旋转缩放后，`rotate`和`scale`属性已经被占用，这时如果我们还需要镜像翻转怎么办呢？也只需要点一下即可。
-![image.png](/img/bVc2MUA)
+![image.png](../../assets/images/content-3/content-3-4.webp)
 
-实现层面则是再加上`rotate3d`或`scale3d`即可，这样他们将同时生效。
-![image.png](/img/bVc2MUs)
+再来看看**Amazon S3**是什么？
 
+![image.png](../../assets/images/content-3/content-3-5.webp)
 
+它是亚马逊的对象存储服务，接下来我们看看哪些网站使用了它。可以看到，使用它的都是非常出名的网站，包括了**linkedin、figma、notion、spotify**等等。足以说明亚马逊的对象存储是个很靠谱的服务，选择它没什么问题。
+![image.png](../../assets/images/content-3/content-3-6.webp)
 
-#### **2.拉伸问题**
-由于拉伸问题程序无法自动判断，所以将交给用户自己设置，即通过`scaleX`和`scaleY`来解决，用户只需要拖拽即可。
-![image.png](/img/bVc2MUB)
+好了，以上我们用Github为例，简单介绍了**Wappalzer**的使用方法。大家可能会发现，其实列出的技术清单也并不是很多，这其实和你访问的网站密不可分，有些技术是很难被探测出来的。
 
-### **3.黑边问题**
-黑边问题本质上是视频的大小不对，同样通过`scale`即可解决。
-![image.png](/img/bVc2MUC)
+## 三、横向对比同一领域使用的技术
+第三个问题，当我了解到了一些我不知道的技术后，是否我就可以直接采用这项技术了呢？非也，一项技术的落地一定和整个生态链以及项目的整体技术架构息息相关。所以我们并不能单一地决定我们是否能采用这项技术。最好的办法之一，我们可以对相同类型的网站进行分析，看看他们对于单一功能是否使用了相同或不同的技术，以便于我们进行技术的分析和选择。
 
-### **4.重复配置问题**
-最后Video Roll还考虑到了如果用户第二次再打开相同的视频，难道又要重复设置一次吗？当然不需要，我们只需要保留对该视频的配置即可，当我下次打开相同的视频时，便会自动生效。
-![image.png](/img/bVc2MUE)
+接下来我们以**StackoverFlow**和**Segmentfault**为例，两者都是问答类技术网站，使用人数都很多，那么我们对比一下他们使用的技术。
 
-## 四、总结
-其实Chrome商城有一些类似的插件，这里推荐两个能用的：
-* **Video Rotater**
-* **Video Transformer**
+**Segmentfault**
+![image.png](../../assets/images/content-3/content-3-7.webp)
 
-Video Rotater比Video Roll早发布，我也是在用了它之后，发现存在一些问题，决定自己写一个。
-Video Transformer则是比Video Roll晚发布，没有交互界面，以快捷键操作为主，相对麻烦。
+**StackoverFlow**
+![image.png](../../assets/images/content-3/content-3-8.webp)
 
-Video Roll诞生的初衷只是为了方便我自己看某些视频时的体验，但笔者想到一定会有很多人有相同的问题，于是选择了发布为浏览器插件，并且开源了出来。
+从上面两张图的技术清单来看，相同的技术有**Google Analytics、Webpack、Highlight.js、Google Tag Manager**。前端的技术我们就不说了，来看看这个**Google Tag Manager**是什么东东。它是一个标签管理系统(TMS)，允许在你的网站或移动应用程序上，快速和轻松地更新测量代码和相关代码片段作为标签。
 
-## 五、欢迎加入
+![image.png](../../assets/images/content-3/content-3-9.webp)
 
-由于发布后用户量一直在增加，现在周活用户已经超过了**1K**，Video Roll可能会持续保持更新，提供更多优化视频体验的功能，希望能做成一个**All in one**的插件，当你在PC端看视频时，只需要这样一个插件即可满足大部分需求。也希望有兴趣的朋友可以和我一起来完善这个插件。
+再来看看哪些网站使用了它
+![image.png](../../assets/images/content-3/content-3-10.webp)
 
-目前插件是基于`Typescript`、`Parcel`和`Vue3`构建的，UI库是`Vant`。下一步希望优化插件构建的工具链、提供第三方库和脚本、以及重构官网。
+那么经过横向对比我们现在知道了，博客系统、招聘网站、问答类系统都在使用这个技术，如果你的系统也有类似打标签的功能，可以放心使用**Google Tag Manager**。
 
-Github: https://github.com/VideoRoll/VideoRoll
-官网：https://gomi.site/VideoRoll
-Chrome商城：https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm
+## 四、这项技术真的过时了吗？
+第四个问题，我们都知道，前端工程化之后，随着各个前端框架的层出不穷，**jQuery**这项技术明显遭到了排挤和抹黑，甚至很多人看不起使用jQuery的前端，认为这是一种low的表现。作为一个经常使用jQuery的前端工程师，我想反驳却不知道从何反驳。这时Wappalzer成了我最好的帮手，我们只需要点开那些最出名的网站，看看是否还在使用jQuery即可。
+
+之前我们已经看到Github、StackoverFlow都还在使用jQuery，那我们就点进去看看还有其他哪些网站在使用。
+
+![image.png](../../assets/images/content-3/content-3-11.webp)
+
+可以看到，**Wordpress、codeopen、gitlab、CSDN**等网站都在使用它，不管是历史遗留原因还是真的需要，都证明了**jQuery**这项技术并不过时。它的定位和现代前端框架本身就不同，不应该受到不公正的评价。
+
+## 五、寻找替代品
+**Wappalzer**还有个强大的功能，那就是列出了今年最火爆的替代技术，以刚刚的**Google Tag Manager**为例，看看它的替代品有哪些。
+
+![image.png](../../assets/images/content-3/content-3-12.webp)
+
+当我们点进某个替代品，会列出两个技术的对比项
+![image.png](../../assets/images/content-3/content-3-13.webp)
+![image.png](../../assets/images/content-3/content-3-14.webp)
+
+## 六、更多功能
+Wappalzer还有其他非常多的功能，包括会告诉你这项技术哪些地区使用最多等。甚至还有收费功能，可以查到更多的技术细节。希望大家可以好好利用这项工具，打开自己的视野。
+

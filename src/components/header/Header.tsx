@@ -48,35 +48,7 @@ export default function Header(props) {
 
             <NavbarContent className="sm:flex gap-4" justify="end">
                 <NavbarItem>
-                    {
-                        props.isLogin ? <Dropdown placement="bottom-end">
-                            <DropdownTrigger>
-                                <Avatar
-                                    isBordered
-                                    as="button"
-                                    className="transition-transform"
-                                    color="secondary"
-                                    name="Jason Hughes"
-                                    size="sm"
-                                    src={user.src}
-                                />
-                            </DropdownTrigger>
-                            <DropdownMenu aria-label="Profile Actions" variant="flat">
-                                {/* <DropdownItem key="profile" className="h-14 gap-2">
-                                    <p className="font-semibold">Signed in as</p>
-                                    <p className="font-semibold">{ }</p>
-                                </DropdownItem> */}
-                                <DropdownItem key="analytics" href='/dashboard'>Dashboard</DropdownItem>
-                                <DropdownItem key="configurations">Configurations</DropdownItem>
-                                <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-                                <DropdownItem key="logout" color="danger" href='/api/auth/signout'>
-                                    Log Out
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown> : <Button as={Link} size="small" href="/signin" variant="flat">
-                            Sign In
-                        </Button>
-                    }
+                    <Button>Dashboard</Button>
                 </NavbarItem>
                 <NavbarItem className="lg:flex">
                     {props.children}

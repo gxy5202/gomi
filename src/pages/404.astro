@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogList from '../components/bloglist/BlogList.tsx';
+import { PER_PAGE_NUM } from '../config';
+import { getCollection, getEntry } from 'astro:content';
+
+const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
+
+// 获取集合中的所有条目。
+// 需要集合的名称作为参数。
+// 示例：检索 `src/content/blog/**`
+const allBlogPosts = await getCollection('blog');
+const totalPages = Math.ceil(allBlogPosts.length / PER_PAGE_NUM);
+---
+<div>404</div>
+
+<style>
+</style>
