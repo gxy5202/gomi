@@ -1,4 +1,5 @@
 ---
+layout: '../../layouts/BlogLayout.astro'
 tags: [tech]
 title: 官方解读，Blink中渲染一个页面有哪些线程参与了工作
 publishDate: 2022-07-28

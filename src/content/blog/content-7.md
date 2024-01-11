@@ -1,4 +1,5 @@
 ---
+layout: '../../layouts/BlogLayout.astro'
 tags: [tech]
 title: 探一探现代浏览器的内部机制（一）
 publishDate: 2022-02-15

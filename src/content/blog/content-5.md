@@ -1,4 +1,5 @@
 ---
+layout: '../../layouts/BlogLayout.astro'
 tags: [tech]
 title: 作为一个LSP，我不允许你不知道这款浏览器插件
 publishDate: 2021-07-08

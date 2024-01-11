@@ -1,4 +1,5 @@
 ---
+layout: '../../layouts/BlogLayout.astro'
 tags: [tech]
 title: 开阔眼界的好工具，一文教你使用Wappalzer来学习全栈技术
 publishDate: 2022-08-14

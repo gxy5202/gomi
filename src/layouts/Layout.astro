@@ -2,17 +2,19 @@
 import { Image } from "astro:assets";
 import leftBg from "../assets/images/docs-left.png";
 import rightBg from "../assets/images/docs-right.png";
+import logo from "../assets/images/logo.png";
 import Header from "../components/header/Header";
 import Footer from "../components/Footer";
-import ThemeBtn from "../components/header/ThemeBtn";
-
+import ThemeBtn from "../components/header/ThemeBtn.astro";
+import { ViewTransitions } from 'astro:transitions';
+import Nav from "../components/header/Nav.astro";
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
-const isLogin = Astro.cookies.has('sb-access-token');
+const isLogin = Astro.cookies.has("sb-access-token");
 ---
 
 <!doctype html>
@@ -30,42 +32,21 @@ const isLogin = Astro.cookies.has('sb-access-token');
 				height: 100%;
 			}
 		</style>
+		<ViewTransitions />
 	</head>
 	<body>
-		<script is:inline>
-			const theme = (() => {
-					if (
-						typeof localStorage !== "undefined" &&
-						localStorage.getItem("theme")
-					) {
-						return localStorage.getItem("theme");
-					}
-					if (
-						window.matchMedia("(prefers-color-scheme: dark)")
-							.matches
-					) {
-						return "dark";
-					}
-					return "light";
-				})();
-
-				document.querySelector("html").setAttribute("data-theme", theme);
-        		document.body.setAttribute("class", theme);
-
-				window.localStorage.setItem("theme", theme);
-			
-		</script>
-		<!-- <Loading client:visible/> -->
 		<div class="flex flex-col justify-between h-screen">
-			<Header client:visible isLogin={isLogin}>
-				<ThemeBtn client:only></ThemeBtn>
+			<Header isLogin={isLogin}>
+				<Nav slot="nav"></Nav>
+				<ThemeBtn slot="theme"></ThemeBtn>
+				<Image src={logo} alt="logo" slot="logo" class="w-12"></Image>
 			</Header>
-			<main class="max-w-\[1024px\] flex-1" transition:persist>
+			<main class="max-w-\[1024px\] flex-1" transition:animate="fade">
 				<slot />
 			</main>
 			<Footer />
-			<Image class="gomi-bg gomi-bg-left" src={leftBg} alt="" />
-			<Image class="gomi-bg gomi-bg-right" src={rightBg} alt="" />
+			<Image class="gomi-bg gomi-bg-left" src={leftBg} alt="" transition:persist/>
+			<Image class="gomi-bg gomi-bg-right" src={rightBg} alt="" transition:persist />
 		</div>
 	</body>
 </html>

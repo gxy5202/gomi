@@ -1,0 +1,34 @@
+---
+import getFormatDate from "../utils/getFormatDate";
+import { HourglassOutline, CalendarOutline } from "@ricons/ionicons5";
+
+const { frontmatter } = Astro.props;
+
+---
+
+<html>
+    <!-- ... -->
+    <h1 class="mt-10">{frontmatter.title}</h1>
+    <div class="flex">
+        <div class="flex mr-6">
+            <CalendarOutline className="w-4 inline mr-2" /><span
+                >{getFormatDate(frontmatter.publishDate)}</span
+            >
+        </div>
+        <div class="flex">
+            <HourglassOutline className="w-4 inline mr-2" /><span
+                >{frontmatter.minutesRead}</span
+            >
+        </div>
+    </div>
+    <img
+        class="rounded-xl w-800"
+        src={frontmatter.cover.replace('../../', '/src/')}
+        alt={frontmatter.title}
+    />
+    <slot />
+    <!-- Markdown 内容被注入到这里 -->
+    <!-- ... -->
+
+
+</html>

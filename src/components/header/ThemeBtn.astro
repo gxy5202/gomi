@@ -1,0 +1,68 @@
+---
+import { Sunny, Moon } from "@ricons/ionicons5";
+import { Button } from "@nextui-org/react";
+import { ThemeType } from "../../store/theme";
+---
+
+<script>
+    const updateIcon = (theme) => {
+        const lightIcon = document.querySelector("#light-icon");
+        const darkIcon = document.querySelector("#dark-icon");
+        if (theme === "dark") {
+            lightIcon.classList.add("hidden");
+            darkIcon.classList.remove("hidden");
+        } else {
+            lightIcon.classList.remove("hidden");
+            darkIcon.classList.add("hidden");
+        }
+    };
+
+    const updateTheme = () => {
+        const theme = (() => {
+            if (
+                typeof localStorage !== "undefined" &&
+                localStorage.getItem("theme")
+            ) {
+                return localStorage.getItem("theme");
+            }
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                return "dark";
+            }
+            return "dark";
+        })();
+
+        document.querySelector("html").setAttribute("data-theme", theme);
+        document.body.setAttribute("class", theme);
+        console.log(theme);
+        window.localStorage.setItem("theme", theme);
+        updateIcon(theme)
+    };
+
+    const clickEvent = () => {
+        const theme = window.localStorage.getItem("theme");
+        const newTheme = theme === "dark" ? "light" : "dark";
+        document.querySelector("html").setAttribute("data-theme", newTheme);
+        document.body.setAttribute("class", newTheme);
+        window.localStorage.setItem("theme", newTheme);
+        updateIcon(newTheme);
+    };
+
+    updateTheme();
+    document.querySelector("#theme-btn").addEventListener("click", clickEvent);
+
+    document.addEventListener("astro:after-swap", () => {
+        updateTheme();
+        document.querySelector("#theme-btn").addEventListener("click", clickEvent);
+    });
+</script>
+
+<Button id="theme-btn" isIconOnly variant="light">
+    {
+        (
+            <>
+                <Sunny id="light-icon" className="hidden w-6 h-6" />
+                <Moon id="dark-icon" className="hidden w-6 h-6" />
+            </>
+        )
+    }
+</Button>

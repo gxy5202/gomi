@@ -2,6 +2,7 @@
 
 import { nextui } from "@nextui-org/react";
 import typography from '@tailwindcss/typography';
+import remark from 'remark';
 
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}', "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
@@ -20,7 +21,7 @@ export default {
 		themes: {
 			light: {
 				colors: {
-					background: "#FFFFFF", // or DEFAULT
+					background: "#e6e9e9", // or DEFAULT
 					foreground: "#000000", // or 50 to 900 DEFAULT
 					primary: {
 						//... 50 to 900

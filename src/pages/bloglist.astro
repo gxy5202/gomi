@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BlogList from '../components/bloglist/BlogList.tsx';
+import { Image } from "astro:assets";
+import BlogItem from '../components/bloglist/BlogItem.tsx';
 import { PER_PAGE_NUM } from '../config';
 import { getCollection, getEntry } from 'astro:content';
+import Pagenation from '../components/bloglist/Pagenation';
 
 const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
 
@@ -11,9 +13,19 @@ const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
 // 示例：检索 `src/content/blog/**`
 const allBlogPosts = await getCollection('blog');
 const totalPages = Math.ceil(allBlogPosts.length / PER_PAGE_NUM);
+const list = allBlogPosts.slice((currentPage - 1) * PER_PAGE_NUM, currentPage * PER_PAGE_NUM)
+
 ---
-<Layout title="Gomi" transition:persist>
-	<BlogList client:load data={allBlogPosts} currentPage={currentPage} totalPages={totalPages}></BlogList>
+<Layout title="Gomi" transition:animate="fade">
+	{
+		list.map((item) => {
+			return <BlogItem item={item}>
+				<Image slot="coverComponent" class="object-cover rounded-xl w-full h-full" src={item.data.cover} alt={item.data.title}></Image>	
+			</BlogItem>
+		})
+	}
+	<Pagenation currentPage={currentPage} totalPages={totalPages}></Pagenation>
+	<!-- <BlogList transition:animate="fade" data={allBlogPosts} currentPage={currentPage} totalPages={totalPages} list={list}></BlogList> -->
 </Layout>
 
 <style>

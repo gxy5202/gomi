@@ -1,7 +1,8 @@
 ---
+layout: '../../layouts/BlogLayout.astro'
 tags: [tech]
 title: Video Roll升级，一款小众浏览器插件优化你看视频的体验
-publishDate: 2021-07-08
+publishDate: 2022-10-03
 cover: "../../assets/images/content-2/content-2.webp"
 ---
 ## 一、前言

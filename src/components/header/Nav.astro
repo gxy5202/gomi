@@ -1,0 +1,136 @@
+---
+import { getRouter } from "../../config";
+---
+
+<style>
+    @keyframes menuAnimationStart {
+        0% {
+            height: 0px;
+        }
+
+        20% {
+            height: 100px;
+        }
+
+        40% {
+            height: 200px;
+        }
+
+        60% {
+            height: 400px;
+        }
+
+        80% {
+            height: 600px;
+        }
+
+        100% {
+            height: calc(100vh - var(--navbar-height) - 1px);
+        }
+    }
+
+    @keyframes menuAnimationStop {
+        0% {
+            height: calc(100vh - var(--navbar-height) - 1px);
+        }
+
+        20% {
+            height: 600px;
+        }
+
+        40% {
+            height: 400px;
+        }
+
+        60% {
+            height: 200px;
+        }
+
+        80% {
+            height: 100px;
+        }
+
+        100% {
+            height: 0px;
+        }
+    }
+
+    .menu-open {
+        animation: menuAnimationStart 0.5s linear backwards;
+    }
+
+    .menu-close {
+        animation: menuAnimationStop 0.5s linear backwards;
+    }
+</style>
+
+<script>
+    let isOpen = false;
+    const clickEvent = () => {
+        isOpen = false;
+        const btn = document.querySelector("#sm-nav-btn");
+        const menu = document.querySelector("#sm-nav-menu");
+        btn.addEventListener("click", () => {
+            isOpen = !isOpen;
+            btn.setAttribute("data-open", String(isOpen));
+
+            if (isOpen) {
+                menu.classList.replace("hidden", "flex");
+                menu.classList.remove("menu-close");
+                menu.classList.add("menu-open");
+                menu.style.height = "calc(100vh - var(--navbar-height) - 1px)";
+            } else {
+                menu.classList.replace("menu-open", "menu-close");
+                menu.style.height = "0px";
+                setTimeout(() => menu.classList.replace("flex", "hidden"), 400);
+            }
+        });
+    };
+    clickEvent();
+
+    window.addEventListener("resize", () => {
+        isOpen = false;
+        const btn = document.querySelector("#sm-nav-btn");
+        const menu = document.querySelector("#sm-nav-menu");
+        btn.setAttribute("data-open", String(isOpen));
+        menu.classList.replace("menu-open", "menu-close");
+        menu.style.height = "0px";
+        setTimeout(() => menu.classList.replace("flex", "hidden"), 400);
+    });
+    document.addEventListener("astro:after-swap", clickEvent);
+</script>
+
+<button
+    id="sm-nav-btn"
+    class="group flex items-center justify-center w-6 h-full rounded-small tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 sm:hidden"
+    type="button"
+    aria-pressed="false"
+    ><span class="sr-only">open navigation menu</span><span
+        class="w-full h-full pointer-events-none flex flex-col items-center justify-center text-inherit group-data-[pressed=true]:opacity-70 transition-opacity before:content-[''] before:block before:h-px before:w-6 before:bg-current before:transition-transform before:duration-150 before:-translate-y-1 before:rotate-0 group-data-[open=true]:before:translate-y-px group-data-[open=true]:before:rotate-45 after:content-[''] after:block after:h-px after:w-6 after:bg-current after:transition-transform after:duration-150 after:translate-y-1 after:rotate-0 group-data-[open=true]:after:translate-y-0 group-data-[open=true]:after:-rotate-45"
+    ></span></button
+>
+
+<ul
+    id="sm-nav-menu"
+    class="sm:hidden hidden z-30 px-6 pt-2 fixed max-w-full top-[var(--navbar-height)] inset-x-0 bottom-0 w-screen flex-col gap-2 overflow-y-auto backdrop-blur-xl backdrop-saturate-150 bg-background/70"
+    style="--navbar-height: 4rem;"
+>
+    {
+        Object.values(getRouter()).map((v) => (
+            <li
+                class="text-large data-[active=true]:font-semibold"
+                data-open="true"
+            >
+                <a
+                    color="foreground"
+                    class="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-large text-foreground no-underline hover:opacity-80 active:opacity-disabled transition-opacity w-full"
+                    tabindex="0"
+                    role="link"
+                    href={`/${v.path}`}
+                >
+                    {v.name}
+                </a>
+            </li>
+        ))
+    }
+</ul>

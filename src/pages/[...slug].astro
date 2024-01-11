@@ -17,13 +17,12 @@ if (entry === undefined) {
 }
 // 4. (可选)在模板中将条目呈现为 HTML
 const data = await entry.render();
-console.log(data, entry);
 
 const { Content } = data;
 ---
-<Layout title="Gomi" transition:persist>
+<Layout title="Gomi" transition:animate="fade">
 	<div class="max-w-[1280px] prose dark:prose-invert">
-		<Content />
+		<Content data/>
 	</div>
 	
 	<!-- {
