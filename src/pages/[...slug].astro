@@ -1,34 +1,39 @@
 ---
-import { getEntry } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
+import { getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import TOC from "../components/TOC.astro";
 // 1. 从传入的服务器请求中获取 slug
 const { slug } = Astro.params;
 
 if (slug === undefined) {
-  throw new Error("Slug is required");
+	throw new Error("Slug is required");
 }
 
 // 2. 直接使用请求 slug 查询条目
-const entry = await getEntry('blog', slug);
+const entry = await getEntry("blog", slug);
 
 // 3. 如果条目不存在，则重定向到 404
 if (entry === undefined) {
-  return Astro.redirect("/404");
+	return Astro.redirect("/404");
 }
 // 4. (可选)在模板中将条目呈现为 HTML
 const data = await entry.render();
 
-const { Content } = data;
+const { Content, headings } = data;
+
 ---
-<Layout title="Gomi" transition:animate="fade">
-	<div class="max-w-[1280px] prose dark:prose-invert">
-		<Content data/>
+
+<Layout isFlex title="Gomi" transition:animate="fade">
+	<div
+		class="relative max-w-[720px] prose dark:prose-invert
+	prose-h1:font-bold prose-h1:text-xl
+	prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
+	>
+		<Content />
 	</div>
-	
-	<!-- {
-		allBlogPosts.map((item) => <div>{item.data.title}</div>)
-	} -->
+	<div class="py-4 px-4 rounded-xl bg-neutral-300/50 dark:bg-neutral-700/50 hidden lg:block sticky top-20 w-[200px] h-max mt-10">
+		<TOC toc={headings}></TOC>
+	</div>
 </Layout>
 
-<style>
-</style>
+<style></style>

@@ -4,12 +4,14 @@ tags: [tech]
 title: 探一探现代浏览器的内部机制（一）
 publishDate: 2022-02-15
 cover: "../../assets/images/content-6/content-6.webp"
+author: "Gomi"
+name: "content-7"
 ---
 >  本文翻译自[Inside look at modern web browser (part 1)](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
 原文作者：[Mariko Kosaka](https://developers.google.com/web/resources/contributors/kosamari)
 翻译：[Gomi](https://gomi.site/#/)
 
-## CPU，GPU，内存以及多进程架构
+### CPU，GPU，内存以及多进程架构
 在这个系列中，我们将会从高层架构的角度深入到Chrome浏览器渲染流程的具体细节。如果你想知道浏览器是如何将你的代码变成一个可用的网站，亦或者你不清楚为何会建议你使用特定的技术来提高网站的性能，那么本系列适合你。
 
 作为本系列的第 1 部分，我们将了解核心计算术语和 Chrome 的多进程架构。

@@ -1,8 +1,14 @@
 ---
+import { Image } from 'astro:assets';
+import TOC from '../components/TOC.astro';
 import getFormatDate from "../utils/getFormatDate";
 import { HourglassOutline, CalendarOutline } from "@ricons/ionicons5";
+import {Divider} from "@nextui-org/react";
+import buildToc from '../utils/buildTOC';
+import MyImage from '../components/MyImage.astro';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
+console.log(headings);
 
 ---
 
@@ -21,14 +27,13 @@ const { frontmatter } = Astro.props;
             >
         </div>
     </div>
-    <img
-        class="rounded-xl w-800"
-        src={frontmatter.cover.replace('../../', '/src/')}
+    <MyImage
+        class="rounded-xl"
+        src={frontmatter.cover.replace("../../", '/src/')}
         alt={frontmatter.title}
     />
+    <Divider />
     <slot />
     <!-- Markdown 内容被注入到这里 -->
     <!-- ... -->
-
-
 </html>

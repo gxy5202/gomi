@@ -1,0 +1,62 @@
+---
+import { Link } from "@nextui-org/react";
+
+type BaseProps<T> = {
+    toc: (T & {
+        depth: number;
+    })[];
+    as?: "bullet" | "number" | "menu";
+    depth?: number;
+    maxDepth?: number;
+    use: (props: any) => any;
+};
+
+type ClassicProps = BaseProps<{
+    title: string;
+    url?: string;
+}>;
+
+type UseComponentProps = BaseProps<{
+    [key: string]: any;
+}>;
+
+export type Props = ClassicProps | UseComponentProps;
+
+const { toc, depth = 2, ...props } = Astro.props as Props;
+const {
+    as = "bullet",
+    use: Cmp,
+    maxDepth,
+    ...styleProps
+} = props; /* styleProps; `class` & `data-astro-cid-*` */
+const headings = toc.filter((it) => it.depth === depth);
+const Tag = "bullet" === as ? "ul" : "number" === as ? "ol" : "menu";
+---
+
+<Tag class={depth > 2 ? 'w-full ml-10':'w-full'} data-astro-toc={depth} {...depth === 1 ? styleProps : {}}>
+    {
+        headings.map((it, idx) => {
+            const nextHeading = headings[idx + 1];
+            const subHeadings = toc.slice(
+                (toc as any).indexOf(it) + 1,
+                nextHeading ? (toc as any).indexOf(nextHeading) : undefined,
+            );
+            const shouldRenderSubHeadings = maxDepth
+                ? maxDepth > it.depth
+                : subHeadings.length > 0;
+
+            return (
+                <li data-astro-toc={depth}>
+                    <Link title={it.text} className="mb-2 block truncate text-slate-600 dark:text-slate-400" href={"#" + it.slug}>{it.text}</Link>
+                    {shouldRenderSubHeadings && (
+                        <Astro.self
+                            toc={subHeadings}
+                            depth={it.depth + 1}
+                            {...props}
+                        />
+                    )}
+                </li>
+            );
+        })
+    }
+</Tag>

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { PER_PAGE_NUM } from '../../config';
 import { Button, Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
+import getFormatDate from '../../utils/getFormatDate';
 
 /**
  * Home page
@@ -10,28 +11,29 @@ export default function BlogItem(props) {
     const { item } = props;
 
     return (<NextUIProvider>
-        <div className="mt-4 max-w-2xl" key={item.data.title}><Link color="foreground" href={`/${item.slug}`}>
-                <Card className="py-4">
-                    <CardBody className="overflow-visible py-2">
-                        <div className="flex justify-start">
-                            <div className="mr-4 w-[200px] h-[100px] bg-red">
-                                {
-                                    props.coverComponent
-                                }
-                                {/* <Image
-                                    removeWrapper
-                                    alt={item.data.title}
-                                    className="object-cover rounded-xl w-full h-full"
-                                    src={item.data.cover.src}
-                                /> */}
-                            </div>
-                            <div className="w-4/5">
-                                <h4 className="font-bold text-large max-[600px]:text-sm">{item.data.title}</h4>
-                                <p>{item.data.publishDate.toDateString()}</p>
-                            </div>
+        <div className="mb-4 w-full" key={item.data.title}><Link className="w-full" color="foreground" href={`/${item.slug}`}>
+            <Card className="py-2 md:w-[600px] xs:w-full">
+                <CardBody className="py-2">
+                    <div className="sm:flex justify-start">
+                        <div className="mr-4 sm:w-[200px] sm:h-[100px] md:w-[200px] md:h-[100px] xs:w-full xs:h-full bg-red">
+                            {
+                                props.coverComponent
+                            }
                         </div>
-                    </CardBody>
-                </Card>
-            </Link></div>
+                        <div className="w-4/5">
+                            <h4 className="font-bold text-large max-[600px]:text-md max-[600px]:mt-4">{item.data.title}</h4>
+                        </div>
+                    </div>
+                </CardBody>
+                <CardFooter className="flex justify-between gap-3">
+                    <div className="flex gap-1">
+                        <p className="text-default-400 text-small">{getFormatDate(item.data.publishDate)}</p>
+                    </div>
+                    <div className="flex gap-1">
+                        <p className="text-default-400 text-small">Written by {item.data.author}</p>
+                    </div>
+                </CardFooter>
+            </Card>
+        </Link></div>
     </NextUIProvider>)
 }

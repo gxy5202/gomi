@@ -24,7 +24,7 @@ export function getRouter() {
     }
 }
 
-export const PER_PAGE_NUM = 4;
+export const PER_PAGE_NUM = 6;
 
 export function getProjects() {
     return [

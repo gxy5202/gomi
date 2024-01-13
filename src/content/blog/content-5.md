@@ -4,6 +4,8 @@ tags: [tech]
 title: 作为一个LSP，我不允许你不知道这款浏览器插件
 publishDate: 2021-07-08
 cover: "../../assets/images/content-5/content-5.webp"
+author: "Gomi"
+name: "content-5"
 ---
 # Video Roll
 

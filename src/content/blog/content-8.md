@@ -4,6 +4,8 @@ tags: [tech]
 title: 探一探现代浏览器的内部机制（一）
 publishDate: 2022-02-15
 cover: "../../assets/images/content-6/content-6.webp"
+author: "Gomi"
+name: "content-8"
 ---
 >  本文翻译自[Inside look at modern web browser (part 1)](https://developers.google.com/web/updates/2018/09/inside-browser-part1)
 原文作者：[Mariko Kosaka](https://developers.google.com/web/resources/contributors/kosamari)

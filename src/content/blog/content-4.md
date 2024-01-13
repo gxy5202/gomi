@@ -4,6 +4,8 @@ tags: [tech]
 title: 官方解读，Blink中渲染一个页面有哪些线程参与了工作
 publishDate: 2022-07-28
 cover: "../../assets/images/content-4/content-4.webp"
+author: "Gomi"
+name: "content-4"
 ---
 ## 一、前言
 以现在Chrome使用的渲染器Blink为例, 它也是Webkit下的一个分支。先贴出官方文档

@@ -4,6 +4,8 @@ tags: [tech]
 title: Video Roll升级，一款小众浏览器插件优化你看视频的体验
 publishDate: 2022-10-03
 cover: "../../assets/images/content-2/content-2.webp"
+author: "Gomi"
+name: "content-2"
 ---
 ## 一、前言
 首先介绍下[Video Roll](https://gomi.site/VideoRoll)，这款浏览器插件能够帮助你旋转、缩放、调整比例和镜像翻转任意网页中的HTML5视频。目前已经有超过**1000+**用户在使用，完全开源，零差评。

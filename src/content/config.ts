@@ -6,6 +6,8 @@ const techCollection = defineCollection({
     title: z.string(),
     tags: z.array(z.string()),
     publishDate: z.date(),
+    author: z.string(),
+    name: z.string(),
     cover: image().refine((img) => img.width <= 1080, {
       message: "封面图片必须至少 1080 像素宽！",
     }),

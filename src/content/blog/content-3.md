@@ -4,6 +4,8 @@ tags: [tech]
 title: 开阔眼界的好工具，一文教你使用Wappalzer来学习全栈技术
 publishDate: 2022-08-14
 cover: "../../assets/images/content-3/content-3.webp"
+author: "Gomi"
+name: "content-3"
 ---
 ## 一、前言
 我先抛出一个问题，市面上这么多相关的技术和方案，如果让你来设计一套Web系统，你会怎么选择？
