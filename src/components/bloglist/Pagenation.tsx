@@ -12,7 +12,7 @@ export default function Pagenation(props) {
     return (<NextUIProvider>
         <div className="blog-pagenation flex gap-2 mt-4">
             <Button
-                href={'/bloglist?page=' + (currentPage > 1 ? currentPage - 1 : currentPage)}
+                href={'/blog?page=' + (currentPage > 1 ? currentPage - 1 : currentPage)}
                 isDisabled={currentPage === 1}
                 as={Link}
                 variant="bordered"
@@ -20,7 +20,7 @@ export default function Pagenation(props) {
                 Previous
             </Button>
             <Button
-                href={'/bloglist?page=' + (currentPage < totalPages ? currentPage + 1 : currentPage)}
+                href={'/blog?page=' + (currentPage < totalPages ? currentPage + 1 : currentPage)}
                 isDisabled={currentPage === totalPages}
                 as={Link}
                 variant="bordered"
