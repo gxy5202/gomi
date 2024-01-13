@@ -2,9 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import BlogItem from "../components/bloglist/BlogItem.tsx";
-import { PER_PAGE_NUM } from "../config";
+import { PER_PAGE_NUM } from "../config/index.ts";
 import { getCollection, getEntry } from "astro:content";
-import Pagenation from "../components/bloglist/Pagenation";
+import Pagenation from "../components/bloglist/Pagenation.tsx";
 
 const currentPage: number | null = +Astro.url.searchParams.get("page")! || 1;
 
@@ -12,8 +12,9 @@ const currentPage: number | null = +Astro.url.searchParams.get("page")! || 1;
 // 需要集合的名称作为参数。
 // 示例：检索 `src/content/blog/**`
 const allBlogPosts = await getCollection("blog");
-const totalPages = Math.ceil(allBlogPosts.length / PER_PAGE_NUM);
-const list = allBlogPosts.slice(
+const data = allBlogPosts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+const totalPages = Math.ceil(data.length / PER_PAGE_NUM);
+const list = data.slice(
 	(currentPage - 1) * PER_PAGE_NUM,
 	currentPage * PER_PAGE_NUM,
 );

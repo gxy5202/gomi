@@ -10,7 +10,7 @@ export default function Projectlist(props) {
     return (<NextUIProvider>
         <div className="projectlist md:grid grid-cols-3 gap-4">
             {getProjects()?.map((item) => <div className="mt-4 max-w-2xl" key={item.name}><Link color="foreground" href={`/${item.slug}`}>
-                <Card className="py-4 md:w-[300px] sm:w-full h-[300px]">
+                <Card className="py-4 w-full h-[300px]">
                     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                         {/* <p className="text-tiny uppercase font-bold">{item.tag}</p> */}
                         <small className="text-default-500">{item.tag}</small>

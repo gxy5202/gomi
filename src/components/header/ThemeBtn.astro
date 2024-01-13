@@ -33,7 +33,7 @@ import { ThemeType } from "../../store/theme";
 
         document.querySelector("html").setAttribute("data-theme", theme);
         document.body.setAttribute("class", theme);
-        console.log(theme);
+
         window.localStorage.setItem("theme", theme);
         updateIcon(theme)
     };
