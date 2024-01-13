@@ -15,7 +15,7 @@ export default function BlogItem(props) {
             <Card className="py-2 md:w-[600px] xs:w-full">
                 <CardBody className="py-2">
                     <div className="sm:flex justify-start">
-                        <div className="mr-4 sm:w-[200px] sm:h-[100px] md:w-[200px] md:h-[100px] xs:w-full xs:h-full bg-red">
+                        <div className="sm:mr-4 sm:w-[200px] sm:h-[100px] md:w-[200px] md:h-[100px] xs:w-full xs:h-full bg-red">
                             {
                                 props.coverComponent
                             }
