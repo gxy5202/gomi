@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import { PER_PAGE_NUM } from '../../config';
-import { Button, Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
+import { Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider } from "@nextui-org/react";
 import getFormatDate from '../../utils/getFormatDate';
 
 /**
@@ -20,7 +19,7 @@ export default function BlogItem(props) {
                                 props.coverComponent
                             }
                         </div>
-                        <div className="w-4/5">
+                        <div className="md:w-4/5">
                             <h4 className="font-bold text-large max-[600px]:text-md max-[600px]:mt-4">{item.data.title}</h4>
                         </div>
                     </div>

@@ -1,15 +1,11 @@
 ---
-import { Image } from 'astro:assets';
-import TOC from '../components/TOC.astro';
 import getFormatDate from "../utils/getFormatDate";
 import { HourglassOutline, CalendarOutline } from "@ricons/ionicons5";
 import {Divider} from "@nextui-org/react";
-import buildToc from '../utils/buildTOC';
 import MyImage from '../components/MyImage.astro';
+import ToTop from '../components/ToTop';
 
 const { frontmatter, headings } = Astro.props;
-console.log(headings);
-
 ---
 
 <html>
@@ -34,6 +30,8 @@ console.log(headings);
     />
     <Divider />
     <slot />
+    
+	<ToTop client:visible/>
     <!-- Markdown 内容被注入到这里 -->
     <!-- ... -->
 </html>
