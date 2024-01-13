@@ -11,11 +11,11 @@ export function getRouter() {
         },
         Blog: {
             name: 'Blog',
-            path: 'bloglist'
+            path: 'blog'
         },
         Project: {
-            name: 'Project',
-            path: 'projectlist/'
+            name: 'Portfolio',
+            path: 'portfolio/'
         },
         About: {
             name: 'About',
