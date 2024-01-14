@@ -1,5 +1,11 @@
 import React from "react";
 import { Card, NextUIProvider, Button, Input, CardBody } from "@nextui-org/react";
+import {
+    getAuth,
+    inMemoryPersistence,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
+import { app } from "../firebase/client";
 
 /**
  * Log in
@@ -15,8 +21,24 @@ export default function Login(props) {
         return validateEmail(email) ? false : true;
     }, [email]);
 
+    const submit = async (e) => {
+        e.preventDefault();
+
+        const form = document.querySelector("form") as HTMLFormElement;
+        const formData = new FormData(form);
+    
+        const response = await fetch("/api/auth/signin", {
+            method: "POST",
+            body: formData
+        });
+
+        if (response.redirected) {
+            window.location.assign(response.url);
+        }
+    }
+
     return (<NextUIProvider>
-        <form action="/api/auth/signin" method="post">
+        <form onSubmit={submit}>
             <div className="justify-center">
                 <Card className="py-4 max-w-xl">
                     <CardBody>
