@@ -4,14 +4,13 @@ import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 import Layout from "../layouts/Layout.astro";
 
-/* 校验用户是否已经通过身份验证 */
-const auth = getAuth(app);
-if (Astro.cookies.has("session")) {
-    const sessionCookie = Astro.cookies.get("session").value;
-    const decodedCookie = await auth.verifySessionCookie(sessionCookie);
-    if (decodedCookie) {
-        return Astro.redirect("/dashboard");
-    }
+const { cookies, redirect } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (accessToken && refreshToken) {
+  return redirect("/dashboard");
 }
 ---
 
