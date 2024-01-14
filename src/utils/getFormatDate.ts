@@ -1,4 +1,5 @@
 export default function getFormatDate(date: Date) {
+
   const options = {
     weekday: 'long',
     year: 'numeric',
