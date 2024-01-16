@@ -1,4 +1,5 @@
-# Astro Blog
+# Astro + NextUI Blog
+
 
 ```sh
 npm create astro@latest -- --template basics
