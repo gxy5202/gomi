@@ -9,9 +9,14 @@ npm create astro@latest -- --template basics
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+> 🧑‍🚀 **Seasoned astronaut?** 
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+![image](https://github.com/gxy5202/gomi/assets/37973863/129e7392-eac8-46cd-9557-2c8fc3bf617b)
+
+![image](https://github.com/gxy5202/gomi/assets/37973863/42b4b102-7a87-4cd3-bf5e-818fac0d7ae0)
+
+![image](https://github.com/gxy5202/gomi/assets/37973863/a7ae98f8-bd77-46f7-8a30-d04b0c05e287)
+
 
 ## 🚀 Project Structure
 
