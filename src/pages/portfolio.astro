@@ -1,11 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Project from '../components/Portfolio';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getProjects } from "../config";
+import PortfolioItem from "../components/PortfolioItem";
 
+const list = getProjects();
 ---
-<Layout title="Gomi" transition:persist>
-	<Project client:load></Project>
+
+<Layout title="Portfolio" transition:persist>
+	<div class="md:grid grid-cols-3 gap-4">
+		{
+			list.map((item, i) => {
+				return (
+					<PortfolioItem item={item}>
+						<Image
+							slot="coverComponent"
+							class="object-cover rounded-xl w-full h-full"
+							src={item.img}
+							alt={item.name}
+						/>
+					</PortfolioItem>
+				);
+			})
+		}
+	</div>
 </Layout>
 
-<style>
-</style>
+<style></style>

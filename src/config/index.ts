@@ -31,32 +31,32 @@ export function getProjects() {
         {
             name: 'Video Roll',
             tag: 'Browser Extension',
-            img: videoRoll.src
+            img: videoRoll
         },
         {
             name: 'Light Ruler',
             tag: 'Canvas',
-            img: lightRuler.src
+            img: lightRuler
         },
         {
             name: 'parcel-namer-hashless',
             tag: 'parcel plugin',
-            img: parcel.src
+            img: parcel
         },
         {
             name: 'UE Helper',
             tag: 'Browser Extension',
-            img: uehelper.src
+            img: uehelper
         },
         {
             name: 'Vue blog',
             tag: 'Vue3, Quasar',
-            img: uehelper.src
+            img: uehelper
         },
         {
             name: 'Astro blog',
             tag: 'Astro, React',
-            img: uehelper.src
+            img: uehelper
         }
     ]
 }

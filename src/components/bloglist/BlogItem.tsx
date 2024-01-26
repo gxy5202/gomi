@@ -3,7 +3,7 @@ import { Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider } from "@n
 import getFormatDate from '../../utils/getFormatDate';
 
 /**
- * Home page
+ * blog
  * @returns 
  */
 export default function BlogItem(props) {
