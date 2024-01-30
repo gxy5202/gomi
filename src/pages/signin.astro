@@ -8,12 +8,13 @@ const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
 
 if (accessToken && refreshToken) {
-  return redirect("/dashboard");
+	return redirect("/dashboard");
 }
 ---
 
+]                                                                                            1zz
 <Layout title="Sign in">
-    <h1>Sign in</h1>
-    <p>New here? <a href="/register">Create an account</a></p>
-    <Login client:load />
+	<h1>Sign in</h1>
+	<p>New here? <a href="/register">Create an account</a></p>
+	<Login client:load />
 </Layout>
