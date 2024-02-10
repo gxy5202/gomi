@@ -49,11 +49,11 @@ import { ThemeType } from "../../store/theme";
 
     updateTheme();
     document.querySelector("#theme-btn").addEventListener("click", clickEvent);
-    debugger;
+
     document.addEventListener("astro:after-swap", () => {
         updateTheme();
         document.querySelector("#theme-btn").addEventListener("click", clickEvent);
-    });
+    }); 
 </script>
 
 <Button id="theme-btn" isIconOnly variant="light">

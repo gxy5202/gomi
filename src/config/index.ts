@@ -49,8 +49,8 @@ export function getProjects() {
             img: uehelper
         },
         {
-            name: 'Vue blog',
-            tag: 'Vue3, Quasar',
+            name: 'zindex-controller',
+            tag: 'Javascript',
             img: uehelper
         },
         {
