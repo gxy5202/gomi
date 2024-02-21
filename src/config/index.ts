@@ -31,32 +31,38 @@ export function getProjects() {
         {
             name: 'Video Roll',
             tag: 'Browser Extension',
-            img: videoRoll
+            img: videoRoll,
+            url: 'https://videoroll.netlify.app'
         },
         {
             name: 'Light Ruler',
             tag: 'Canvas',
-            img: lightRuler
+            img: lightRuler,
+            url: 'https://github.com/gxy5202/light-ruler'
         },
         {
             name: 'parcel-namer-hashless',
             tag: 'parcel plugin',
-            img: parcel
+            img: parcel,
+            url: "https://www.npmjs.com/package/parcel-namer-hashless"
         },
         {
             name: 'UE Helper',
             tag: 'Browser Extension',
-            img: uehelper
+            img: uehelper,
+            url: "https://chromewebstore.google.com/detail/ue-helper/mkjblagjddaejickpddjeadifkeagaoo?hl=zh-CN"
         },
         {
             name: 'zindex-controller',
             tag: 'Javascript',
-            img: uehelper
+            img: uehelper,
+            url: "https://github.com/gxy5202/zIndexController"
         },
         {
             name: 'Astro blog',
             tag: 'Astro, React',
-            img: uehelper
+            img: uehelper,
+            url: "https://github.com/gxy5202/gomi"
         }
     ]
 }
