@@ -10,7 +10,7 @@ export default function PortfolioItem(props) {
     const { item } = props;
 
     return (<NextUIProvider>
-        <div className="mt-4 w-full" key={item.name}><Link color="foreground" href={item.url} target="_blank">
+        <div className="mt-4 w-full" key={item.name}><Link color="foreground" href={item.url} tar="_blank">
             <Card className="py-4 md:w-[300px] w-full h-[300px]">
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start w-full">
                     {/* <p className="text-tiny uppercase font-bold">{item.tag}</p> */}
