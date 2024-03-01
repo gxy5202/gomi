@@ -3,11 +3,11 @@ layout: '../../layouts/BlogLayout.astro'
 tags: [tech]
 title: Chrome 109版本后，Event.path非标准属性已被去掉
 publishDate: 2024-02-29
-cover: "../../assets/images/content-18/content-18.webp"
+cover: "../../assets/images/content-19/content-19.jpg"
 author: "Gomi"
 name: "content-19"
 ---
-## Astro 简介
+## 问题解决
 之前在项目中遇到一个奇怪的问题，运行得好好的产品突然一下，右键功能、鼠标点击弹窗等功能都出现了问题，要么就是点不出来，要么就是出来了关不了。
 
 但很奇怪的是，代码没有任何改动，为什么之前功能都是OK的，现在却不行了。没办法，只有去打个断电，看看哪里出错了。最后排查报错，竟然是EventTarget.path属性没了？什么鬼，都用了几十年这个属性啦好吧！
