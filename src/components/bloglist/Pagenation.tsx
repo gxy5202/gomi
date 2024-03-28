@@ -1,6 +1,4 @@
-import { useMemo } from 'react';
-import { PER_PAGE_NUM } from '../../config';
-import { Button, Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
+import { Button, Link, NextUIProvider } from "@nextui-org/react";
 
 /**
  * Home page

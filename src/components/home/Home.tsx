@@ -1,6 +1,5 @@
 import { NextUIProvider } from "@nextui-org/react";
 import { Button } from '@nextui-org/react';
-import { useEffect, useRef } from "react";
 import { LogoGithub, LogoLinkedin, LogoTwitter } from "@ricons/ionicons5";
 import './style.less';
 

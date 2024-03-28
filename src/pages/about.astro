@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PDFReader from '../components/pdf/PDFReader';
+
+---
+
+<Layout title="About" transition:animate="fade">
+    <div class="mt-10 w-full">
+        <PDFReader client:load></PDFReader>
+    </div>
+</Layout>
+
+<style is:global>
+    .react-pdf__Page {
+        background-color: transparent !important;
+    }
+</style>

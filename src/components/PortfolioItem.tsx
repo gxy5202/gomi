@@ -1,6 +1,4 @@
-import { useMemo } from 'react';
-import { Button, Link, Card, CardFooter, CardBody, CardHeader, NextUIProvider, Image } from "@nextui-org/react";
-import { getProjects } from '../config';
+import { Link, Card, CardBody, CardHeader, NextUIProvider } from "@nextui-org/react";
 
 /**
  * ProjectItem
