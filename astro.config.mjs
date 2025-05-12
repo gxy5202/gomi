@@ -11,6 +11,7 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
   prefetch: true,
   integrations: [react(), tailwind()],
   adapter: netlify(),
@@ -18,6 +19,9 @@ export default defineConfig({
       port: 3000,
       host: true,
       serverEntry: 'entry.mjs'
+  },
+  legacy: {
+    collections: true
   },
   devToolbar: {
     enabled: false
