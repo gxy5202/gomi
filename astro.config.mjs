@@ -6,14 +6,14 @@ import remarkToc from 'remark-toc';
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 
 
+import netlify from '@astrojs/netlify';
+
+
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
   prefetch: true,
   integrations: [react(), tailwind()],
-  adapter: node({
-    mode: "standalone"
-  }),
+  adapter: netlify(),
   experimental: {
     contentCollectionCache: true,
   },
