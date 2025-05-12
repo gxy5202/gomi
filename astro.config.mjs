@@ -14,9 +14,6 @@ export default defineConfig({
   prefetch: true,
   integrations: [react(), tailwind()],
   adapter: netlify(),
-  experimental: {
-    contentCollectionCache: true,
-  },
   server: {
       port: 3000,
       host: true,
