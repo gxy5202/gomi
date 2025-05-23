@@ -1,5 +1,5 @@
-import { NextUIProvider } from "@nextui-org/react";
-import { Button } from '@nextui-org/react';
+import { HeroUIProvider } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { LogoGithub, LogoLinkedin, LogoTwitter } from "@ricons/ionicons5";
 import './style.less';
 
@@ -26,7 +26,7 @@ const buttons = [
  * @returns 
  */
 export default function Home() {
-    return (<NextUIProvider>
+    return (<HeroUIProvider>
         <div className="home">
             <div className="gomi-home-info ms:mt-24 mt-64 text-left pl-2">
                 <h1 className="info-text text-3xl">Hi, this is Gomi</h1>
@@ -38,5 +38,5 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    </NextUIProvider>)
+    </HeroUIProvider>)
 }

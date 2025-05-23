@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { ChevronUpOutline } from "@ricons/ionicons5";
 
 export default function ToTop() {

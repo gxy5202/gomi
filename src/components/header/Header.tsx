@@ -1,4 +1,4 @@
-import { NextUIProvider, Navbar, Link, Button, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react";
+import { HeroUIProvider, Navbar, Link, Button, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
 import { getRouter } from '../../config';
 
 
@@ -7,7 +7,7 @@ import { getRouter } from '../../config';
  * @returns 
  */
 export default function Header(props) {
-    return (<NextUIProvider>
+    return (<HeroUIProvider>
         <Navbar className="nav-bar" maxWidth="lg">
             {
                 props.nav
@@ -33,9 +33,9 @@ export default function Header(props) {
             </NavbarContent>
 
             <NavbarContent className="sm:flex gap-4" justify="end">
-                <NavbarItem>
+                {/* <NavbarItem>
                     <Link href="/signin">Dashboard</Link>
-                </NavbarItem>
+                </NavbarItem> */}
                 <NavbarItem className="lg:flex">
                     {
                         props.theme
@@ -44,5 +44,5 @@ export default function Header(props) {
             </NavbarContent>
         </Navbar>
 
-    </NextUIProvider>)
+    </HeroUIProvider>)
 }

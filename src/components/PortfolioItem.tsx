@@ -1,4 +1,4 @@
-import { Link, Card, CardBody, CardHeader, NextUIProvider } from "@nextui-org/react";
+import { Link, Card, CardBody, CardHeader, HeroUIProvider } from "@heroui/react";
 
 /**
  * ProjectItem
@@ -7,7 +7,7 @@ import { Link, Card, CardBody, CardHeader, NextUIProvider } from "@nextui-org/re
 export default function PortfolioItem(props) {
     const { item } = props;
 
-    return (<NextUIProvider>
+    return (<HeroUIProvider>
         <div className="mt-4 w-full" key={item.name}><Link color="foreground" href={item.url} tar="_blank">
             <Card className="py-4 md:w-[300px] w-full h-[300px]">
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start w-full">
@@ -24,5 +24,5 @@ export default function PortfolioItem(props) {
                 </CardBody>
             </Card>
         </Link></div>
-    </NextUIProvider>)
+    </HeroUIProvider>)
 }

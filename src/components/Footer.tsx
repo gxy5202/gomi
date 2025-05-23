@@ -1,4 +1,4 @@
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 
 /**
  * Home page
@@ -6,9 +6,9 @@ import { NextUIProvider } from "@nextui-org/react";
  */
 export default function Footer() {
  
-    return (<NextUIProvider>
+    return (<HeroUIProvider>
         <div className="text-center py-2">
-            <p className="text-sm">© 2019-2024 Gomi | <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">蜀ICP备18020532号-1</a></p>
+            <p className="text-sm">© 2019-{new Date().getFullYear()} Gomi | <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">蜀ICP备18020532号-1</a></p>
         </div>
-    </NextUIProvider>)
+    </HeroUIProvider>)
 }

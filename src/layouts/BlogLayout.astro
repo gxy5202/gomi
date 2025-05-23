@@ -1,37 +1,40 @@
 ---
 import getFormatDate from "../utils/getFormatDate";
 import { HourglassOutline, CalendarOutline } from "@ricons/ionicons5";
-import {Divider} from "@nextui-org/react";
-import MyImage from '../components/MyImage.astro';
-import ToTop from '../components/ToTop';
+import { Divider } from "@heroui/react";
+import MyImage from "../components/MyImage.astro";
+import ToTop from "../components/ToTop";
+import './blog.less'
 
 const { frontmatter, headings } = Astro.props;
 ---
 
 <html>
-    <!-- ... -->
-    <h1 class="mt-10">{frontmatter.title}</h1>
-    <div class="flex">
-        <div class="flex mr-6">
-            <CalendarOutline className="w-4 inline mr-2" /><span class="text-sm sm:text-base"
-                >{getFormatDate(frontmatter.publishDate)}</span
-            >
-        </div>
-        <div class="flex">
-            <HourglassOutline className="w-4 inline mr-2" /><span class="text-sm sm:text-base"
-                >{frontmatter.minutesRead}</span
-            >
-        </div>
+  <!-- ... -->
+  <h1 class="mt-10">{frontmatter.title}</h1>
+  <div class="flex">
+    <div class="flex mr-6">
+      <CalendarOutline className="w-4 inline mr-2" /><span
+        class="text-sm sm:text-base"
+        >{getFormatDate(frontmatter.publishDate)}</span
+      >
     </div>
-    <MyImage
-        class="rounded-xl"
-        src={frontmatter.cover.replace("../../", '/src/')}
-        alt={frontmatter.title}
-    />
-    <Divider />
-    <slot />
-    
-	<ToTop client:visible/>
-    <!-- Markdown 内容被注入到这里 -->
-    <!-- ... -->
+    <div class="flex">
+      <HourglassOutline className="w-4 inline mr-2" /><span
+        class="text-sm sm:text-base">{frontmatter.minutesRead}</span
+      >
+    </div>
+  </div>
+  <MyImage
+    class="rounded-xl"
+    src={frontmatter.cover.replace("../../", "/src/")}
+    alt={frontmatter.title}
+  />
+  <Divider />
+  <slot />
+
+  <ToTop client:visible />
+  <!-- Markdown 内容被注入到这里 -->
+  <!-- ... -->
+
 </html>
