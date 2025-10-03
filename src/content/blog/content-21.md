@@ -3,7 +3,7 @@ layout: '../../layouts/BlogLayout.astro'
 tags: [work]
 title: 2024年工作回顾
 publishDate: 2025-05-21
-cover: "../../assets/images/content-more/content-21.jpg"
+cover: "../../assets/images/content-more/content-23.png"
 author: "Gomi"
 name: "content-21"
 ---
