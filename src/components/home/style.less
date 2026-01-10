@@ -28,3 +28,84 @@
         content: '🤓'
     }
 }
+
+.project-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.5), rgba(236, 72, 153, 0.5));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover {
+        transform: translateY(-4px);
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+        
+        &::before {
+            opacity: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+    }
+}
+
+.post-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(20, 30, 48, 0.4) 0%, rgba(10, 15, 30, 0.4) 100%);
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    transition: all 0.3s ease;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(90deg, rgba(56, 189, 248, 0.4), rgba(139, 92, 246, 0.4));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover {
+        transform: translateX(4px);
+        background: linear-gradient(135deg, rgba(20, 30, 48, 0.7) 0%, rgba(10, 15, 30, 0.7) 100%);
+        border-color: rgba(139, 92, 246, 0.3);
+        
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes borderRotate {
+    0% {
+        background: linear-gradient(0deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.5), rgba(236, 72, 153, 0.5));
+    }
+    
+    33% {
+        background: linear-gradient(120deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.5), rgba(236, 72, 153, 0.5));
+    }
+    
+    66% {
+        background: linear-gradient(240deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.5), rgba(236, 72, 153, 0.5));
+    }
+    
+    100% {
+        background: linear-gradient(360deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.5), rgba(236, 72, 153, 0.5));
+    }
+}

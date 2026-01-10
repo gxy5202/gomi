@@ -1,10 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Home from "../components/home/Home.tsx";
+import { getCollection } from "astro:content";
+
+// 获取所有博客文章并按发布日期排序
+const allBlogPosts = await getCollection("blog");
+const sortedPosts = allBlogPosts
+	.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+	.slice(0, 3); // 只取最新的3篇
+
+// 转换为 Home 组件需要的格式
+const recentPosts = sortedPosts.map(post => ({
+	title: post.data.title,
+	date: new Date(post.data.publishDate).toISOString().split('T')[0],
+	url: `/${post.slug}`,
+}));
 ---
 
 <Layout title="Gomi" transition:animate="fade">
-	<Home client:load/>
+	<Home client:load recentPosts={recentPosts}/>
 </Layout>
 
 <style>
