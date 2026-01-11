@@ -2,6 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import Home from "../components/home/Home.tsx";
 import { getCollection } from "astro:content";
+import { getProjects } from "../config";
+
+// 获取项目数据，只取前4个
+const allProjects = getProjects();
+const projects = allProjects.slice(0, 4);
 
 // 获取所有博客文章并按发布日期排序
 const allBlogPosts = await getCollection("blog");
@@ -14,11 +19,12 @@ const recentPosts = sortedPosts.map(post => ({
 	title: post.data.title,
 	date: new Date(post.data.publishDate).toISOString().split('T')[0],
 	url: `/${post.slug}`,
+	cover: post.data.cover.src, // 添加封面图片
 }));
 ---
 
 <Layout title="Gomi" transition:animate="fade">
-	<Home client:load recentPosts={recentPosts}/>
+	<Home client:load projects={projects} recentPosts={recentPosts}/>
 </Layout>
 
 <style>
