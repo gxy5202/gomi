@@ -1,8 +1,9 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import TOC from "../components/TOC.astro";
+import TOC from "../components/TOC";
 import ToTop from "../components/ToTop";
+import PostNavigation from "../components/PostNavigation";
 
 // 1. 从传入的服务器请求中获取 slug
 const { slug } = Astro.params;
@@ -18,7 +19,17 @@ const entry = await getEntry("blog", slug);
 if (entry === undefined) {
 	return Astro.redirect("/404");
 }
-// 4. (可选)在模板中将条目呈现为 HTML
+
+// 4. 获取上一篇和下一篇文章
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort(
+	(a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+const currentIndex = sortedPosts.findIndex((post) => post.slug === slug);
+const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+
+// 5. (可选)在模板中将条目呈现为 HTML
 const data = await entry.render();
 
 const { Content, headings } = data;
@@ -33,9 +44,13 @@ const { Content, headings } = data;
 	"
 	>
 		<Content />
+		<PostNavigation
+			prevPost={prevPost ? { slug: prevPost.slug, title: prevPost.data.title } : null}
+			nextPost={nextPost ? { slug: nextPost.slug, title: nextPost.data.title } : null}
+		/>
 	</div>
 	<div class="py-4 px-4 rounded-xl bg-neutral-300/50 dark:bg-neutral-700/50 hidden lg:block sticky top-20 w-[200px] h-max mt-10">
-		<TOC toc={headings}></TOC>
+		<TOC toc={headings} client:load />
 	</div>
 </Layout>
 

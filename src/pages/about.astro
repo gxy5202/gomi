@@ -1,17 +1,54 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PDFReader from '../components/pdf/PDFReader';
-
 ---
 
-<Layout title="About" transition:animate="fade">
-    <div class="mt-10 w-full">
-        <PDFReader client:load></PDFReader>
-    </div>
-</Layout>
+<Layout title="About - Gomi" transition:animate="fade">
+  <div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold mb-8">About Me</h1>
 
-<style is:global>
-    .react-pdf__Page {
-        background-color: transparent !important;
-    }
-</style>
+    <!-- 简介 -->
+    <div class="mb-12">
+      <p class="text-lg text-gray-300 leading-relaxed">
+        我是勾鑫宇（Gomi），2019年本科毕业于成都东软学院-信息管理与信息系统专业。毕业后先后就职于<a
+          href="https://www.sefonsoft.com"
+          target="_blank"
+          class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400"
+          >Sefonsoft</a
+        >和<a
+          href="https://zhuanlan.zhihu.com/p/702976469"
+          target="_blank"
+          class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400"
+          >四川邦辰信息科技有限公司</a
+        >，目前就职于<a
+        href="hhttps://www.yixintanggroup.com/"
+        target="_blank"
+        class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400"
+        >一心堂</a>，担任前端开发工程师。
+      </p>
+    </div>
+
+    <!-- 获奖经历 -->
+    <div>
+      <h2 class="text-lg font-bold mb-4">
+        获奖经历
+        <a
+          href="https://www.baidu.com/s?wd=%E6%88%90%E9%83%BD%E4%B8%9C%E8%BD%AF%E5%AD%A6%E9%99%A2%20%E6%AF%94%E8%B5%9B%E8%8E%B7%E5%A5%96%20%E5%8B%BE%E9%91%AB%E5%AE%87"
+          target="_blank"
+          class="ml-2 text-sm font-normal text-gray-400 hover:text-blue-400 transition-colors"
+          title="AI总结"
+        >🔍 AI总结 →</a>
+      </h2>
+      <ul class="list-disc text-base list-inside space-y-2 text-gray-300 ml-2">
+        <li><a href="https://segmentfault.com/a/1190000043289217?utm_source=sf-backlinks" target="_blank" class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400">SegmentFault 思否2022年度Top Writer（技术问答）</a></li>
+        <li><a href="https://mp.weixin.qq.com/s/SHh2UcZeBTLykexGqCuNDA" target="_blank" class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400">2019年四川省优秀毕业生</a></li>
+        <li>2019年四川省大学生综合素质A级证书</li>
+        <li><a href="https://bm.nsu.edu.cn/2019/535A4F88-7678-4A77-8665-1789D90ACAD3.html" target="_blank" class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400">第十二届中国大学生计算机设计大赛四川省二等奖、全国总决赛三等奖</a></li>
+        <li><a href="https://itbm.nsu.edu.cn/2018/585F550B-2235-405C-87C4-50E9147B0E33.html" target="_blank" class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400">第八届全国大学生“创新、创意及创业”挑战赛全国总决赛二等奖</a></li>
+        <li>第四届全国移动互联创新大赛全国总决赛二等奖</li>
+        <li>第四届全国大学生网络编辑创新大赛程序组一等奖</li>
+        <li>2018年四川省创青春大赛铜奖</li>
+        <li><a href="https://mp.weixin.qq.com/s/oBiBdvvML-nf3hOXpghjCA" target="_blank" class="text-white font-semibold hover:text-blue-400 transition-colors underline decoration-gray-600 hover:decoration-blue-400">第二届创业蛙大赛总决赛一等奖</a></li>
+      </ul>
+    </div>
+  </div>
+</Layout>

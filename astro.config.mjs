@@ -16,7 +16,7 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   adapter: netlify(),
   server: {
-      port: 3000,
+      port: 18120,
       host: true,
       serverEntry: 'entry.mjs'
   },

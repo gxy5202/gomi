@@ -12,34 +12,38 @@ const currentPage: number | null = +Astro.url.searchParams.get("page")! || 1;
 // 需要集合的名称作为参数。
 // 示例：检索 `src/content/blog/**`
 const allBlogPosts = await getCollection("blog");
-const data = allBlogPosts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+const data = allBlogPosts.sort(
+  (a, b) =>
+    new Date(b.data.publishDate).getTime() -
+    new Date(a.data.publishDate).getTime()
+);
 const totalPages = Math.ceil(data.length / PER_PAGE_NUM);
 const list = data.slice(
-	(currentPage - 1) * PER_PAGE_NUM,
-	currentPage * PER_PAGE_NUM,
+  (currentPage - 1) * PER_PAGE_NUM,
+  currentPage * PER_PAGE_NUM
 );
 ---
 
 <Layout title="Gomi" transition:animate="fade">
-	<div class="mt-10 w-full">
-		{
-			list.map((item) => {
-				return (
-					<BlogItem item={item}>
-						<Image
-							slot="coverComponent"
-							class="object-cover rounded-xl w-full h-full"
-							src={item.data.cover}
-							alt={item.data.title}
-						/>
-					</BlogItem>
-				);
-			})
-		}
-		<Pagenation currentPage={currentPage} totalPages={totalPages} />
-	</div>
+  <div class="mt-10 w-full">
+    {
+      list.map((item) => {
+        return (
+          <BlogItem item={item}>
+            <Image
+              slot="coverComponent"
+              class="object-cover rounded-xl w-full h-full"
+              src={item.data.cover}
+              alt={item.data.title}
+            />
+          </BlogItem>
+        );
+      })
+    }
+    <Pagenation currentPage={currentPage} totalPages={totalPages} />
+  </div>
 
-	<!-- <BlogList transition:animate="fade" data={allBlogPosts} currentPage={currentPage} totalPages={totalPages} list={list}></BlogList> -->
+  <!-- <BlogList transition:animate="fade" data={allBlogPosts} currentPage={currentPage} totalPages={totalPages} list={list}></BlogList> -->
 </Layout>
 
 <style></style>
