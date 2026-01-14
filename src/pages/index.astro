@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Home from "../components/home/Home.tsx";
 import { getCollection } from "astro:content";
-import { getProjects } from "../config";
+import { getProjects, getContributions } from "../config";
 
 // 获取项目数据，只取前4个
 const allProjects = getProjects();
@@ -21,10 +21,23 @@ const recentPosts = sortedPosts.map(post => ({
 	url: `/${post.slug}`,
 	cover: post.data.cover.src, // 添加封面图片
 }));
+
+// 获取贡献数据，提取前5个唯一的项目
+const contributions = getContributions();
+const uniqueProjects = Array.from(new Set(contributions.map(c => c.project)))
+  .slice(0, 5)
+  .map(project => {
+    const orgName = project.split('/')[0];
+    return {
+      project,
+      iconUrl: `https://github.com/${orgName}.png`,
+      orgName,
+    };
+  });
 ---
 
 <Layout title="Gomi" transition:animate="fade">
-	<Home client:load projects={projects} recentPosts={recentPosts}/>
+	<Home client:load projects={projects} recentPosts={recentPosts} contributionProjects={uniqueProjects}/>
 </Layout>
 
 <style>

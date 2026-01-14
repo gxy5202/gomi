@@ -28,16 +28,23 @@ interface Post {
   cover: string;
 }
 
+interface ContributionProject {
+  project: string;
+  iconUrl: string;
+  orgName: string;
+}
+
 interface HomeProps {
   projects?: Project[];
   recentPosts?: Post[];
+  contributionProjects?: ContributionProject[];
 }
 
 /**
  * Home page
  * @returns
  */
-export default function Home({ projects = [], recentPosts = [] }: HomeProps) {
+export default function Home({ projects = [], recentPosts = [], contributionProjects = [] }: HomeProps) {
   return (
     <HeroUIProvider>
       <div className="home min-h-screen text-gray-100 flex items-center justify-center px-6 py-12">
@@ -110,6 +117,24 @@ export default function Home({ projects = [], recentPosts = [] }: HomeProps) {
                 className="text-green-400"
               />
               <span className="text-base s-medium">Open Source Contributions</span>
+              {contributionProjects.length > 0 && (
+                <div className="flex items-center -space-x-2 ml-2">
+                  {contributionProjects.map((item, index) => (
+                    <img
+                      key={index}
+                      src={item.iconUrl}
+                      alt={item.project}
+                      className="w-6 h-6 rounded-full border-2 border-gray-800 hover:border-gray-600 transition-colors"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = `https://github.com/identicons/${item.orgName}.png`;
+                      }}
+                      title={item.project}
+                    />
+                  ))}
+                </div>
+              )}
               <ArrowForward
                 style={{ width: "16px", height: "16px" }}
                 className="group-hover:translate-x-1 transition-transform"
