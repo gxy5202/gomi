@@ -9,12 +9,15 @@ import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 import netlify from '@astrojs/netlify';
 
 
+import cloudflare from "@astrojs/cloudflare";
+
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
   prefetch: true,
   integrations: [react(), tailwind()],
-  adapter: netlify(),
+  adapter: cloudflare(),
   server: {
       port: 18120,
       host: true,
