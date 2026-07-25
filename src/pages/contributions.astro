@@ -1,47 +1,98 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ContributionTimeline from "../components/contributions/ContributionTimeline.tsx";
+import BrandGithub from "@tabler/icons/outline/brand-github.svg";
+import GitCommit from "@tabler/icons/outline/git-commit.svg";
+import { Badge } from "@/components/starwind/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/starwind/avatar";
 import { getContributions } from "../config";
 
 // 开源贡献数据
 const contributions = getContributions();
+
+// 唯一项目列表(用于 org 头像展示)
+const uniqueProjects = Array.from(new Set(contributions.map((c) => c.project))).map(
+  (project) => {
+    const orgName = project.split("/")[0];
+    return {
+      project,
+      orgName,
+      iconUrl: `https://github.com/${orgName}.png`,
+    };
+  }
+);
 ---
 
 <Layout title="Open Source Contributions - Gomi" transition:animate="fade">
-  <div class="max-w-4xl mx-auto py-12 px-4">
-    <div class="mb-12">
-      <h1 class="text-4xl font-bold mb-4">Open Source Contributions</h1>
-      
-      <!-- 项目展示区域 -->
-      <div class="mt-8 flex flex-wrap gap-6">
-        {
-          Array.from(new Set(contributions.map(c => c.project)))
-            .map(project => {
-              const orgName = project.split('/')[0];
-              const iconUrl = `https://github.com/${orgName}.png`;
-              return { project, orgName, iconUrl };
-            })
-            .map(({ project, iconUrl, orgName }) => (
-              <div class="flex flex-col items-center group cursor-pointer hover:opacity-80 transition-opacity">
-                <img
-                  src={iconUrl}
-                  alt={project}
-                  class="w-12 h-12 rounded-full mb-2 border-2 border-gray-600 group-hover:border-gray-400 transition-colors object-contain"
-                  loading="lazy"
-                  onerror={`this.onerror=null; this.src='https://github.com/identicons/${orgName}.png'`}
-                />
-                <span class="text-sm text-gray-300 text-center max-w-[100px] truncate" title={project}>
-                  {project}
-                </span>
-              </div>
-            ))
-        }
-      </div>
+  <section class="mb-12">
+    <h1 class="text-chrome text-4xl font-bold tracking-tight">
+      Open Source Contributions
+    </h1>
+
+    <div class="mt-8 flex flex-wrap gap-5">
+      {
+        uniqueProjects.map(({ project, iconUrl, orgName }) => (
+          <div class="group flex flex-col items-center gap-2">
+            <Avatar size="lg" class="card-hover">
+              <AvatarImage src={iconUrl} alt={project} loading="lazy" />
+              <AvatarFallback>
+                <BrandGithub class="text-muted-foreground size-5" />
+              </AvatarFallback>
+            </Avatar>
+            <span
+              class="text-muted-foreground max-w-[110px] truncate text-xs"
+              title={project}
+            >
+              {project}
+            </span>
+          </div>
+        ))
+      }
     </div>
-    
-    <ContributionTimeline client:load contributions={contributions} />
+  </section>
+
+  <div class="relative ml-2 border-l border-border/60 pl-6">
+    {
+      contributions.map((contribution) => (
+        <div class="relative pb-6 last:pb-0">
+          <span class="bg-background border-border absolute top-5 -left-[31px] flex size-4 items-center justify-center rounded-full border">
+            <span class="bg-chrome-3 size-1.5 rounded-full" />
+          </span>
+          <div class="glass card-hover rounded-2xl p-5">
+            <div class="flex items-start gap-3">
+              <GitCommit class="text-muted-foreground mt-0.5 size-4 shrink-0" />
+              <div class="min-w-0 flex-1">
+                <a
+                  href={contribution.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-foreground hover:text-chrome font-medium transition-colors hover:underline"
+                >
+                  {contribution.description}
+                </a>
+                <div class="mt-3 flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary" size="sm">
+                    {contribution.project}
+                  </Badge>
+                  <Badge variant="outline" size="sm">
+                    {contribution.type}
+                  </Badge>
+                  {contribution.stars && (
+                    <img
+                      src={contribution.stars}
+                      alt="GitHub stars"
+                      class="h-5"
+                      loading="lazy"
+                    />
+                  )}
+                  <span class="text-muted-foreground text-xs">
+                    {contribution.date}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
   </div>
 </Layout>
-
-<style>
-</style>

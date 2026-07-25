@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link } from "@heroui/react";
 
 interface Heading {
   depth: number;
@@ -44,21 +43,21 @@ const TOCItem = ({
     <li data-toc-depth={heading.depth} className="relative">
       <div
         className={`absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-200 ${
-          isActive ? "bg-blue-500 dark:bg-blue-400" : "bg-transparent"
+          isActive ? "bg-primary" : "bg-transparent"
         }`}
       />
-      <Link
+      <a
         title={heading.text}
-        className={`mb-2 pl-3 block break-words transition-colors duration-200 ${
+        className={`mb-2 pl-3 block break-words text-sm transition-colors duration-200 ${
           isActive
-            ? "text-blue-500 dark:text-blue-400 font-medium"
-            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+            ? "text-foreground font-medium"
+            : "text-muted-foreground hover:text-foreground"
         }`}
         href={`#${heading.slug}`}
         onClick={handleClick}
       >
         {heading.text}
-      </Link>
+      </a>
       {shouldRenderSub && (
         <TOCList
           toc={subHeadings}

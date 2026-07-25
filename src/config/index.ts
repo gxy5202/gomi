@@ -1,5 +1,6 @@
 import lightRuler from "../assets/images/light-ruler.png";
 import videoRoll from "../assets/images/videoroll.png";
+import addfoxUrl from "../assets/images/addfox.png?url";
 import uehelper from "../assets/images/uehelper.png";
 import parcel from "../assets/images/parcel.png";
 import logo from "../assets/images/logo.png";
@@ -254,6 +255,19 @@ export function getProjects() {
       ],
     },
     {
+      icon: addfoxUrl,
+      iconType: "img",
+      name: "addfox",
+      description:
+        "🦊 Browser extension framework built on Rsbuild — one install, addfox dev / build.",
+      url: "https://addfox.dev",
+      tags: ["Browser Extension", "Rsbuild"],
+      badges: [
+        "https://flat.badgen.net/npm/dm/addfox",
+        "https://img.shields.io/github/stars/addfox/addfox",
+      ],
+    },
+    {
       icon: parcel.src,
       iconType: "img",
       name: "parcel-namer-hashless",
@@ -265,7 +279,6 @@ export function getProjects() {
         "https://img.shields.io/github/stars/gxy5202/parcel-namer-hashless",
       ],
     },
-
     {
       icon: lightRuler.src,
       iconType: "img",
@@ -277,7 +290,6 @@ export function getProjects() {
       badges: [
         "https://flat.badgen.net/npm/dm/light-ruler",
         "https://img.shields.io/github/stars/gxy5202/light-ruler",
-        ,
       ],
     },
     {

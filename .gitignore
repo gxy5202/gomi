@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # Windows Mark-of-the-Web (invalid path on Windows)
 *:Zone.Identifier
+
+# Local Netlify folder
+.netlify
+
+# Local Cloudflare folder
+.wrangler
+.dev.vars

@@ -1,18 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import BlogList from '../components/bloglist/BlogList.tsx';
-import { PER_PAGE_NUM } from '../config';
-import { getCollection, getEntry } from 'astro:content';
-
-const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
-
-// 获取集合中的所有条目。
-// 需要集合的名称作为参数。
-// 示例：检索 `src/content/blog/**`
-const allBlogPosts = await getCollection('blog');
-const totalPages = Math.ceil(allBlogPosts.length / PER_PAGE_NUM);
+import Layout from "../layouts/Layout.astro";
+import Home from "@tabler/icons/outline/home.svg";
+import { Button } from "@/components/starwind/button";
 ---
-<div>404</div>
 
-<style>
-</style>
+<Layout title="404 - Gomi" transition:animate="fade">
+  <section class="flex flex-col items-center py-24 text-center">
+    <p class="text-chrome text-[8rem] leading-none font-bold tracking-tight sm:text-[12rem]">
+      404
+    </p>
+    <p class="text-muted-foreground mt-6 text-lg">
+      This page seems to have dissolved into liquid metal.
+    </p>
+    <Button href="/" variant="outline" class="glass mt-10 rounded-full">
+      <Home class="size-4" />
+      Back to Home
+    </Button>
+  </section>
+</Layout>

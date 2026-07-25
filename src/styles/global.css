@@ -1,0 +1,116 @@
+@import "./starwind.css";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --breakpoint-xs: 370px;
+}
+
+/* Markdown body styles —— 使用主题变量,深浅色通用 */
+.markdown {
+  @apply text-foreground leading-relaxed break-words text-base tracking-wide;
+}
+
+.markdown > * + * {
+  @apply mt-0 mb-4;
+}
+
+.markdown li + li {
+  @apply mt-1;
+}
+
+.markdown li > p + p {
+  @apply mt-6;
+}
+
+.markdown strong {
+  @apply font-semibold;
+}
+
+.markdown a {
+  @apply text-foreground font-medium underline decoration-muted-foreground/50 underline-offset-4 transition-colors hover:decoration-foreground;
+}
+
+.markdown strong a {
+  @apply font-bold;
+}
+
+.markdown h1 {
+  @apply leading-tight border-b border-border text-3xl font-semibold mb-4 mt-6 pb-2;
+}
+
+.markdown h2 {
+  @apply leading-tight border-b border-border text-2xl font-semibold mb-4 mt-6 pb-2;
+}
+
+.markdown h3 {
+  @apply leading-snug text-lg font-semibold mb-4 mt-6;
+}
+
+.markdown h4 {
+  @apply leading-none text-base font-semibold mb-4 mt-6;
+}
+
+.markdown h5 {
+  @apply leading-tight text-sm font-semibold mb-4 mt-6;
+}
+
+.markdown h6 {
+  @apply leading-tight text-sm font-semibold text-muted-foreground mb-4 mt-6;
+}
+
+.markdown blockquote {
+  @apply text-base border-l-4 border-border pl-4 pr-4 text-muted-foreground;
+}
+
+.markdown hr {
+  @apply border-border/60 my-8;
+}
+
+/* Short inline code */
+.markdown code {
+  @apply font-mono text-sm inline bg-muted text-foreground rounded px-1 py-0.5;
+}
+
+/* Long code block */
+.markdown pre {
+  @apply bg-muted/60 text-foreground border border-border/60 rounded-xl p-4 overflow-auto;
+}
+
+.markdown pre code {
+  @apply block bg-transparent text-foreground p-0 overflow-visible rounded-none;
+}
+
+.markdown ul {
+  @apply text-base pl-8 list-disc marker:text-chrome-4;
+}
+
+.markdown ol {
+  @apply text-base pl-8 list-decimal marker:text-muted-foreground;
+}
+
+.markdown kbd {
+  @apply text-xs inline-block rounded border border-border px-1 py-0.5 align-middle font-normal font-mono shadow text-foreground bg-muted;
+}
+
+.markdown table {
+  @apply text-base border border-border;
+}
+
+.markdown th {
+  @apply border border-border py-1 px-3 bg-muted/50;
+}
+
+.markdown td {
+  @apply border border-border py-1 px-3;
+}
+
+/* Larger rounded corners for images, with margin */
+.markdown img {
+  @apply rounded-xl my-4;
+}
+
+/* Override pygments style background color. */
+.markdown .highlight pre {
+  @apply bg-muted/60! text-foreground!;
+}

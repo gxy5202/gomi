@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Home from "../components/home/Home.tsx";
+import Home from "../components/home/Home.astro";
 import { getCollection } from "astro:content";
 import { getProjects, getContributions } from "../config";
 
@@ -8,19 +8,11 @@ import { getProjects, getContributions } from "../config";
 const allProjects = getProjects();
 const projects = allProjects.slice(0, 4);
 
-// 获取所有博客文章并按发布日期排序
+// 获取所有博客文章并按发布日期排序，只取最新的3篇
 const allBlogPosts = await getCollection("blog");
-const sortedPosts = allBlogPosts
+const recentPosts = allBlogPosts
 	.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
-	.slice(0, 3); // 只取最新的3篇
-
-// 转换为 Home 组件需要的格式
-const recentPosts = sortedPosts.map(post => ({
-	title: post.data.title,
-	date: new Date(post.data.publishDate).toISOString().split('T')[0],
-	url: `/${post.slug}`,
-	cover: post.data.cover.src, // 添加封面图片
-}));
+	.slice(0, 3);
 
 // 获取贡献数据，提取前5个唯一的项目
 const contributions = getContributions();
@@ -37,8 +29,5 @@ const uniqueProjects = Array.from(new Set(contributions.map(c => c.project)))
 ---
 
 <Layout title="Gomi" transition:animate="fade">
-	<Home client:load projects={projects} recentPosts={recentPosts} contributionProjects={uniqueProjects}/>
+	<Home projects={projects} recentPosts={recentPosts} contributionProjects={uniqueProjects}/>
 </Layout>
-
-<style>
-</style>

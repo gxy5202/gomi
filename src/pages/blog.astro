@@ -1,12 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import BlogItem from "../components/bloglist/BlogItem.tsx";
+import BlogCard from "../components/bloglist/BlogCard.astro";
 import { PER_PAGE_NUM } from "../config/index.ts";
-import { getCollection, getEntry } from "astro:content";
-import Pagenation from "../components/bloglist/Pagenation.tsx";
+import { getCollection } from "astro:content";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/starwind/pagination";
 
-const currentPage: number | null = +Astro.url.searchParams.get("page")! || 1;
+const currentPage: number = +Astro.url.searchParams.get("page")! || 1;
 
 // 获取集合中的所有条目。
 // 需要集合的名称作为参数。
@@ -22,28 +29,87 @@ const list = data.slice(
   (currentPage - 1) * PER_PAGE_NUM,
   currentPage * PER_PAGE_NUM
 );
+
+// 分页页码:页数少时全展示,多时以当前页为中心开窗口
+type PageEntry = number | "ellipsis";
+const pageEntries: PageEntry[] = (() => {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+  const pages = new Set<number>([
+    1,
+    totalPages,
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+  ]);
+  const sorted = [...pages]
+    .filter((p) => p >= 1 && p <= totalPages)
+    .sort((a, b) => a - b);
+  const result: PageEntry[] = [];
+  let prev = 0;
+  for (const p of sorted) {
+    if (p - prev > 1) result.push("ellipsis");
+    result.push(p);
+    prev = p;
+  }
+  return result;
+})();
+
+const pageHref = (page: number) => (page === 1 ? "/blog" : `/blog?page=${page}`);
 ---
 
-<Layout title="Gomi" transition:animate="fade">
-  <div class="mt-10 w-full">
-    {
-      list.map((item) => {
-        return (
-          <BlogItem item={item}>
-            <Image
-              slot="coverComponent"
-              class="object-cover rounded-xl w-full h-full"
-              src={item.data.cover}
-              alt={item.data.title}
-            />
-          </BlogItem>
-        );
-      })
-    }
-    <Pagenation currentPage={currentPage} totalPages={totalPages} />
+<Layout title="Blog - Gomi" transition:animate="fade">
+  <section class="mb-10">
+    <h1 class="text-chrome text-4xl font-bold tracking-tight">Blog</h1>
+  </section>
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    {list.map((post) => <BlogCard post={post} />)}
   </div>
 
-  <!-- <BlogList transition:animate="fade" data={allBlogPosts} currentPage={currentPage} totalPages={totalPages} list={list}></BlogList> -->
+  {
+    totalPages > 1 && (
+      <Pagination class="mt-12">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href={pageHref(currentPage > 1 ? currentPage - 1 : 1)}
+              aria-disabled={currentPage === 1}
+              class={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+            />
+          </PaginationItem>
+          {pageEntries.map((entry) =>
+            entry === "ellipsis" ? (
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+            ) : (
+              <PaginationItem>
+                <PaginationLink
+                  href={pageHref(entry)}
+                  isActive={entry === currentPage}
+                >
+                  {entry}
+                </PaginationLink>
+              </PaginationItem>
+            )
+          )}
+          <PaginationItem>
+            <PaginationNext
+              href={pageHref(
+                currentPage < totalPages ? currentPage + 1 : totalPages
+              )}
+              aria-disabled={currentPage === totalPages}
+              class={
+                currentPage === totalPages
+                  ? "pointer-events-none opacity-50"
+                  : ""
+              }
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    )
+  }
 </Layout>
-
-<style></style>

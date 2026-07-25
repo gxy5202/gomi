@@ -1,0 +1,55 @@
+---
+import ArrowLeft from "@tabler/icons/outline/arrow-left.svg";
+import ArrowRight from "@tabler/icons/outline/arrow-right.svg";
+
+interface PostInfo {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  prevPost: PostInfo | null;
+  nextPost: PostInfo | null;
+}
+
+const { prevPost, nextPost } = Astro.props;
+---
+
+{
+  (prevPost || nextPost) && (
+    <nav class="border-border/60 mt-12 grid grid-cols-2 gap-4 border-t pt-8">
+      <div class="min-w-0">
+        {prevPost && (
+          <a
+            href={`/${prevPost.slug}`}
+            class="glass card-hover group flex h-full flex-col gap-1 rounded-2xl p-4"
+          >
+            <span class="text-muted-foreground inline-flex items-center gap-1.5 text-xs">
+              <ArrowLeft class="size-3.5 transition-transform group-hover:-translate-x-1" />
+              Previous
+            </span>
+            <span class="text-foreground truncate text-sm font-medium">
+              {prevPost.title}
+            </span>
+          </a>
+        )}
+      </div>
+      <div class="min-w-0">
+        {nextPost && (
+          <a
+            href={`/${nextPost.slug}`}
+            class="glass card-hover group flex h-full flex-col items-end gap-1 rounded-2xl p-4 text-right"
+          >
+            <span class="text-muted-foreground inline-flex items-center gap-1.5 text-xs">
+              Next
+              <ArrowRight class="size-3.5 transition-transform group-hover:translate-x-1" />
+            </span>
+            <span class="text-foreground w-full truncate text-sm font-medium">
+              {nextPost.title}
+            </span>
+          </a>
+        )}
+      </div>
+    </nav>
+  )
+}

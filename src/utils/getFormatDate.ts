@@ -1,6 +1,6 @@
 export default function getFormatDate(date: Date) {
 
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',

@@ -1,0 +1,146 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BrandGithub from "@tabler/icons/outline/brand-github.svg";
+import BrandLinkedin from "@tabler/icons/outline/brand-linkedin.svg";
+import BrandX from "@tabler/icons/outline/brand-x.svg";
+import Mail from "@tabler/icons/outline/mail.svg";
+import ArrowRight from "@tabler/icons/outline/arrow-right.svg";
+import GitCommit from "@tabler/icons/outline/git-commit.svg";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/starwind/avatar";
+import { Button } from "@/components/starwind/button";
+import ProjectCard from "@/components/portfolio/ProjectCard.astro";
+import BlogCard from "@/components/bloglist/BlogCard.astro";
+
+interface Project {
+  icon: string;
+  iconType: string;
+  name: string;
+  description: string;
+  url: string;
+  tags: string[];
+  badges?: string[];
+}
+
+interface ContributionProject {
+  project: string;
+  iconUrl: string;
+  orgName: string;
+}
+
+interface Props {
+  projects?: Project[];
+  recentPosts?: CollectionEntry<"blog">[];
+  contributionProjects?: ContributionProject[];
+}
+
+const {
+  projects = [],
+  recentPosts = [],
+  contributionProjects = [],
+} = Astro.props;
+
+const socials = [
+  { href: "https://github.com/gxy5202", label: "GitHub", Icon: BrandGithub },
+  {
+    href: "https://www.linkedin.com/in/xinyu-gou-5558b721a",
+    label: "LinkedIn",
+    Icon: BrandLinkedin,
+  },
+  { href: "https://twitter.com/GomiGxy", label: "X", Icon: BrandX },
+  { href: "mailto:gxy880520@gmail.com", label: "Email", Icon: Mail },
+];
+---
+
+<section class="flex flex-col items-start gap-6 py-14 sm:py-20">
+  <img
+    src="/Gomi_Avatar.png"
+    alt="Gomi"
+    width="96"
+    height="96"
+    class="ring-border/60 size-24 rounded-full object-cover ring-2 sm:size-28"
+  />
+  <h1 class="text-chrome text-4xl font-bold tracking-tight sm:text-5xl">
+    Hi, I'm Gomi (勾鑫宇)
+  </h1>
+  <p class="text-muted-foreground max-w-xl text-lg leading-relaxed">
+    A front end developer who is creating the life he loves.
+  </p>
+  <div class="flex flex-wrap items-center gap-3">
+    {
+      socials.map(({ href, label, Icon }) => (
+        <Button
+          variant="outline"
+          size="sm"
+          href={href}
+          target={href.startsWith("mailto:") ? undefined : "_blank"}
+          rel="noreferrer"
+          class="glass rounded-full"
+        >
+          <Icon class="size-4" />
+          {label}
+        </Button>
+      ))
+    }
+  </div>
+
+  {
+    contributionProjects.length > 0 && (
+      <a
+        href="/contributions"
+        class="glass card-hover group mt-2 inline-flex items-center gap-3 rounded-full py-2 pr-5 pl-3"
+      >
+        <span class="flex items-center -space-x-2.5">
+          {contributionProjects.map((item) => (
+            <Avatar size="sm" class="ring-background ring-2">
+              <AvatarImage src={item.iconUrl} alt={item.project} loading="lazy" />
+              <AvatarFallback>
+                <BrandGithub class="text-muted-foreground size-3.5" />
+              </AvatarFallback>
+            </Avatar>
+          ))}
+        </span>
+        <span class="text-muted-foreground group-hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors">
+          <GitCommit class="size-4" />
+          Open Source Contributions
+        </span>
+        <ArrowRight class="text-muted-foreground size-4 transition-transform group-hover:translate-x-1" />
+      </a>
+    )
+  }
+</section>
+
+<section class="py-8">
+  <div class="mb-6 flex items-center justify-between">
+    <h2 class="text-muted-foreground text-sm font-medium tracking-widest">
+      Featured Projects
+    </h2>
+    <a
+      href="/portfolio"
+      class="text-muted-foreground hover:text-foreground group inline-flex items-center gap-1 text-sm transition-colors"
+    >
+      More
+      <ArrowRight class="size-4 transition-transform group-hover:translate-x-1" />
+    </a>
+  </div>
+  <div class="grid gap-5 md:grid-cols-2">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+</section>
+
+<section class="py-8">
+  <div class="mb-6 flex items-center justify-between">
+    <h2 class="text-muted-foreground text-sm font-medium tracking-widest">
+      Recent Posts
+    </h2>
+    <a
+      href="/blog"
+      class="text-muted-foreground hover:text-foreground group inline-flex items-center gap-1 text-sm transition-colors"
+    >
+      More
+      <ArrowRight class="size-4 transition-transform group-hover:translate-x-1" />
+    </a>
+  </div>
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {recentPosts.map((post) => <BlogCard post={post} />)}
+  </div>
+</section>

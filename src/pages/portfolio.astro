@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PortfolioGrid from "../components/portfolio/PortfolioGrid.tsx";
+import ProjectCard from "../components/portfolio/ProjectCard.astro";
 import { getProjects } from "../config";
 
 // 获取所有项目数据
@@ -8,13 +8,11 @@ const projects = getProjects();
 ---
 
 <Layout title="Portfolio - Gomi" transition:animate="fade">
-  <div class="max-w-6xl mx-auto py-12 px-4">
-    <div class="mb-12">
-      <h1 class="text-4xl font-bold mb-4">Portfolio</h1>
-    </div>
-    
-    <PortfolioGrid client:load projects={projects} />
+  <section class="mb-10">
+    <h1 class="text-chrome text-4xl font-bold tracking-tight">Portfolio</h1>
+  </section>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    {projects.map((project) => <ProjectCard project={project} />)}
   </div>
 </Layout>
-
-<style></style>

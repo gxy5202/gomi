@@ -1,0 +1,35 @@
+---
+import ArrowUp from "@tabler/icons/outline/arrow-up.svg";
+---
+
+<button
+  id="to-top-btn"
+  type="button"
+  aria-label="Back to top"
+  class="glass text-muted-foreground hover:text-foreground fixed right-6 bottom-6 z-40 inline-flex size-11 translate-y-4 items-center justify-center rounded-full opacity-0 shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+  transition:persist
+>
+  <ArrowUp class="size-5" />
+</button>
+
+<script>
+  const btn = document.getElementById("to-top-btn");
+  if (btn && !btn.hasAttribute("data-init")) {
+    btn.setAttribute("data-init", "true");
+
+    const updateVisibility = () => {
+      const show = window.scrollY > 400;
+      btn.classList.toggle("opacity-0", !show);
+      btn.classList.toggle("translate-y-4", !show);
+      btn.classList.toggle("pointer-events-none", !show);
+    };
+
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    document.addEventListener("astro:after-swap", updateVisibility);
+    updateVisibility();
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+</script>

@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import Calendar from "@tabler/icons/outline/calendar.svg";
+import Clock from "@tabler/icons/outline/clock.svg";
+import { Badge } from "@/components/starwind/badge";
+import getFormatDate from "@/utils/getFormatDate";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const minutesRead = (post.data as Record<string, unknown>).minutesRead as
+  | string
+  | undefined;
+---
+
+<a
+  href={`/${post.id}`}
+  class="glass card-hover group flex h-full flex-col overflow-hidden rounded-2xl"
+>
+  <div class="aspect-[2/1] w-full overflow-hidden">
+    <Image
+      src={post.data.cover}
+      alt={post.data.title}
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <h3
+      class="text-foreground group-hover:text-chrome line-clamp-2 text-base leading-snug font-semibold"
+    >
+      {post.data.title}
+    </h3>
+    <div class="mt-auto flex flex-wrap items-center gap-2">
+      {post.data.tags?.slice(0, 3).map((tag) => <Badge variant="secondary" size="sm">{tag}</Badge>)}
+    </div>
+    <div class="text-muted-foreground flex items-center gap-4 text-xs">
+      <span class="inline-flex items-center gap-1.5">
+        <Calendar class="size-3.5" />
+        {getFormatDate(post.data.publishDate)}
+      </span>
+      {
+        minutesRead && (
+          <span class="inline-flex items-center gap-1.5">
+            <Clock class="size-3.5" />
+            {minutesRead}
+          </span>
+        )
+      }
+    </div>
+  </div>
+</a>

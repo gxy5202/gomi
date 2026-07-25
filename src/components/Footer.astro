@@ -1,0 +1,54 @@
+---
+import BrandGithub from "@tabler/icons/outline/brand-github.svg";
+import BrandLinkedin from "@tabler/icons/outline/brand-linkedin.svg";
+import BrandX from "@tabler/icons/outline/brand-x.svg";
+import Mail from "@tabler/icons/outline/mail.svg";
+
+const socials = [
+  { href: "https://github.com/gxy5202", label: "GitHub", Icon: BrandGithub },
+  {
+    href: "https://www.linkedin.com/in/xinyu-gou-5558b721a",
+    label: "LinkedIn",
+    Icon: BrandLinkedin,
+  },
+  { href: "https://twitter.com/GomiGxy", label: "X", Icon: BrandX },
+  { href: "mailto:gxy880520@gmail.com", label: "Email", Icon: Mail },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="glass-thin mt-20 border-t border-border/60">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row"
+  >
+    <p class="text-muted-foreground text-sm">
+      © 2019-{year} Gomi ·
+      <a
+        href="https://beian.miit.gov.cn/#/Integrated/index"
+        target="_blank"
+        rel="noreferrer"
+        class="hover:text-foreground transition-colors"
+      >
+        蜀ICP备18020532号-1
+      </a>
+    </p>
+    <ul class="flex items-center gap-1">
+      {
+        socials.map(({ href, label, Icon }) => (
+          <li>
+            <a
+              href={href}
+              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              rel="noreferrer"
+              aria-label={label}
+              class="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex size-9 items-center justify-center rounded-lg transition-colors"
+            >
+              <Icon class="size-5" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

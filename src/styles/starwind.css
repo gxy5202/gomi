@@ -1,0 +1,341 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/forms";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--starwind-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--starwind-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-accent: var(--primary-accent);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-accent: var(--secondary-accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-outline: var(--outline);
+
+  --radius-xs: calc(var(--radius) - 0.375rem);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-2xl: calc(var(--radius) + 0.5rem);
+  --radius-3xl: calc(var(--radius) + 1rem);
+
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-outline: var(--sidebar-outline);
+
+  --color-chrome-1: var(--chrome-1);
+  --color-chrome-2: var(--chrome-2);
+  --color-chrome-3: var(--chrome-3);
+  --color-chrome-4: var(--chrome-4);
+  --color-chrome-5: var(--chrome-5);
+}
+
+/* 液态金属银主题 —— 浅色:珍珠铬银 / 深色:液态汞银 */
+:root {
+  --background: #e9ebef;
+  --foreground: #171a20;
+  --card: #f4f5f8;
+  --card-foreground: #171a20;
+  --popover: #f7f8fa;
+  --popover-foreground: #171a20;
+  --primary: #3d4554;
+  --primary-foreground: #f2f4f7;
+  --primary-accent: #2e3542;
+  --secondary: #dde1e8;
+  --secondary-foreground: #1b1f27;
+  --secondary-accent: #2a303b;
+  --muted: #dfe2e9;
+  --muted-foreground: #5a6373;
+  --accent: #d3d8e1;
+  --accent-foreground: #171a20;
+  --info: var(--color-sky-300);
+  --info-foreground: var(--color-sky-950);
+  --success: var(--color-green-300);
+  --success-foreground: var(--color-green-950);
+  --warning: var(--color-amber-300);
+  --warning-foreground: var(--color-amber-950);
+  --error: var(--color-red-700);
+  --error-foreground: var(--color-neutral-50);
+  --border: #c6ccd7;
+  --input: #c6ccd7;
+  --outline: #7e8899;
+  --radius: 0.75rem;
+
+  /* 液态金属流光色带(浅色) */
+  --chrome-1: #f8fafc;
+  --chrome-2: #d8dde6;
+  --chrome-3: #aeb8c8;
+  --chrome-4: #8fa3bd;
+  --chrome-5: #c9bfd8;
+
+  /* sidebar variables */
+  --sidebar-background: #eef0f4;
+  --sidebar-foreground: #171a20;
+  --sidebar-primary: #3d4554;
+  --sidebar-primary-foreground: #f2f4f7;
+  --sidebar-accent: #dde1e8;
+  --sidebar-accent-foreground: #171a20;
+  --sidebar-border: #c6ccd7;
+  --sidebar-outline: #7e8899;
+}
+
+.dark {
+  --background: #0a0c10;
+  --foreground: #e5e8ee;
+  --card: #12151b;
+  --card-foreground: #e5e8ee;
+  --popover: #161a21;
+  --popover-foreground: #e5e8ee;
+  --primary: #ccd2dc;
+  --primary-foreground: #14171d;
+  --primary-accent: #aab2c0;
+  --secondary: #22262f;
+  --secondary-foreground: #e5e8ee;
+  --secondary-accent: #c3cad6;
+  --muted: #191d25;
+  --muted-foreground: #8991a1;
+  --accent: #262b35;
+  --accent-foreground: #eef1f6;
+  --info: var(--color-sky-300);
+  --info-foreground: var(--color-sky-950);
+  --success: var(--color-green-300);
+  --success-foreground: var(--color-green-950);
+  --warning: var(--color-amber-300);
+  --warning-foreground: var(--color-amber-950);
+  --error: var(--color-red-800);
+  --error-foreground: var(--color-neutral-50);
+  --border: --alpha(#e5e8ee / 12%);
+  --input: --alpha(#e5e8ee / 16%);
+  --outline: #6b7484;
+
+  /* 液态金属流光色带(深色) */
+  --chrome-1: #3c4454;
+  --chrome-2: #5f6b80;
+  --chrome-3: #8b98ad;
+  --chrome-4: #b8c2d2;
+  --chrome-5: #7d7396;
+
+  /* sidebars variables */
+  --sidebar-background: #10131a;
+  --sidebar-foreground: #e5e8ee;
+  --sidebar-primary: #ccd2dc;
+  --sidebar-primary-foreground: #14171d;
+  --sidebar-accent: #22262f;
+  --sidebar-accent-foreground: #e5e8ee;
+  --sidebar-border: #22262f;
+  --sidebar-outline: #5d6572;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-outline/50;
+  }
+  body {
+    @apply bg-background text-foreground scheme-light dark:scheme-dark;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+/* ===== 液态金属银:玻璃拟态与流光背景 ===== */
+
+/* 玻璃拟态面板 */
+@utility glass {
+  background: --alpha(var(--card) / 55%);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid --alpha(var(--foreground) / 8%);
+}
+
+/* 更薄的玻璃,用于导航栏等 */
+@utility glass-thin {
+  background: --alpha(var(--background) / 60%);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border-bottom: 1px solid --alpha(var(--foreground) / 8%);
+}
+
+/* 金属渐变文字 */
+@utility text-chrome {
+  background-image: linear-gradient(
+    115deg,
+    var(--chrome-3) 0%,
+    var(--foreground) 30%,
+    var(--chrome-4) 50%,
+    var(--foreground) 70%,
+    var(--chrome-3) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: chrome-shine 8s linear infinite;
+}
+
+/* 卡片 hover:轻微上浮 + 阴影/边框高光 */
+@utility card-hover {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+    border-color: --alpha(var(--foreground) / 18%);
+    box-shadow:
+      0 12px 32px --alpha(var(--foreground) / 8%),
+      0 2px 8px --alpha(var(--foreground) / 6%);
+  }
+}
+
+/* 金属渐变描边按钮/徽标底 */
+@utility bg-chrome {
+  background-image: linear-gradient(
+    115deg,
+    var(--chrome-1),
+    var(--chrome-2) 35%,
+    var(--chrome-3) 60%,
+    var(--chrome-2) 85%,
+    var(--chrome-1)
+  );
+  background-size: 200% auto;
+}
+
+@keyframes chrome-shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes liquid-drift-1 {
+  0%, 100% { transform: translate(-10%, -6%) rotate(0deg) scale(1); }
+  50% { transform: translate(6%, 8%) rotate(24deg) scale(1.15); }
+}
+
+@keyframes liquid-drift-2 {
+  0%, 100% { transform: translate(8%, 10%) rotate(0deg) scale(1.1); }
+  50% { transform: translate(-8%, -6%) rotate(-20deg) scale(0.95); }
+}
+
+@keyframes liquid-drift-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(10%, -8%) scale(1.2); }
+  66% { transform: translate(-6%, 10%) scale(0.9); }
+}
+
+/* 液态金属背景层 */
+.liquid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.liquid-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.liquid-blob-1 {
+  width: 55vmax;
+  height: 55vmax;
+  top: -18vmax;
+  left: -12vmax;
+  background: radial-gradient(circle at 35% 35%, var(--chrome-4), var(--chrome-2) 55%, transparent 75%);
+  opacity: 0.55;
+  animation: liquid-drift-1 26s ease-in-out infinite;
+}
+
+.liquid-blob-2 {
+  width: 48vmax;
+  height: 48vmax;
+  bottom: -16vmax;
+  right: -10vmax;
+  background: radial-gradient(circle at 60% 40%, var(--chrome-3), var(--chrome-1) 55%, transparent 75%);
+  opacity: 0.5;
+  animation: liquid-drift-2 32s ease-in-out infinite;
+}
+
+.liquid-blob-3 {
+  width: 34vmax;
+  height: 34vmax;
+  top: 30%;
+  left: 45%;
+  background: radial-gradient(circle at 50% 50%, var(--chrome-5), transparent 70%);
+  opacity: 0.35;
+  animation: liquid-drift-3 38s ease-in-out infinite;
+}
+
+/* 金属拉丝斜向光泽 */
+.liquid-sheen {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    --alpha(var(--chrome-1) / 35%) 45%,
+    --alpha(var(--chrome-3) / 22%) 52%,
+    transparent 65%
+  );
+  background-size: 250% 250%;
+  animation: chrome-shine 14s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-blob, .liquid-sheen, .text-chrome {
+    animation: none;
+  }
+}

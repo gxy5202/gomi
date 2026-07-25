@@ -1,27 +1,25 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
-import node from '@astrojs/node';
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import remarkToc from 'remark-toc';
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 
 
-import netlify from '@astrojs/netlify';
+import cloudflare from '@astrojs/cloudflare';
 
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+	output: 'server',
   prefetch: true,
-  integrations: [react(), tailwind()],
-  adapter: netlify(),
+  integrations: [react()],
+  adapter: cloudflare(),
+  vite: {
+    plugins: [tailwindcss()],
+  },
   server: {
       port: 18120,
       host: true,
-      serverEntry: 'entry.mjs'
-  },
-  legacy: {
-    collections: true
   },
   devToolbar: {
     enabled: false

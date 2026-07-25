@@ -1,40 +1,60 @@
 ---
+import { Image } from "astro:assets";
+import Calendar from "@tabler/icons/outline/calendar.svg";
+import Clock from "@tabler/icons/outline/clock.svg";
+import User from "@tabler/icons/outline/user.svg";
+import { Badge } from "@/components/starwind/badge";
 import getFormatDate from "../utils/getFormatDate";
-import { HourglassOutline, CalendarOutline } from "@ricons/ionicons5";
-import { Divider } from "@heroui/react";
-import MyImage from "../components/MyImage.astro";
-import ToTop from "../components/ToTop";
-import './blog.less'
+import ToTop from "../components/ToTop.astro";
 
-const { frontmatter, headings } = Astro.props;
+const { frontmatter, minutesRead } = Astro.props;
 ---
 
-<html>
-  <!-- ... -->
-  <h1 class="mt-10">{frontmatter.title}</h1>
-  <div class="flex">
-    <div class="flex mr-6">
-      <CalendarOutline className="w-4 inline mr-2" /><span
-        class="text-sm sm:text-base"
-        >{getFormatDate(frontmatter.publishDate)}</span
-      >
-    </div>
-    <div class="flex">
-      <HourglassOutline className="w-4 inline mr-2" /><span
-        class="text-sm sm:text-base">{frontmatter.minutesRead}</span
-      >
-    </div>
+<header class="mb-8">
+  <h1 class="text-chrome mt-6 mb-4 text-3xl leading-tight font-bold sm:text-4xl">
+    {frontmatter.title}
+  </h1>
+  <div
+    class="text-muted-foreground flex flex-wrap items-center gap-x-5 gap-y-2 text-sm"
+  >
+    <span class="inline-flex items-center gap-1.5">
+      <Calendar class="size-4" />
+      {getFormatDate(frontmatter.publishDate)}
+    </span>
+    {
+      minutesRead && (
+        <span class="inline-flex items-center gap-1.5">
+          <Clock class="size-4" />
+          {minutesRead}
+        </span>
+      )
+    }
+    <span class="inline-flex items-center gap-1.5">
+      <User class="size-4" />
+      {frontmatter.author}
+    </span>
   </div>
-  <MyImage
-    class="rounded-xl"
-    src={frontmatter.cover.replace("../../", "/src/")}
-    alt={frontmatter.title}
-  />
-  <Divider />
-  <slot />
+  {
+    frontmatter.tags?.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        {frontmatter.tags.map((tag: string) => (
+          <Badge variant="secondary" size="sm">
+            {tag}
+          </Badge>
+        ))}
+      </div>
+    )
+  }
+</header>
 
-  <ToTop client:visible />
-  <!-- Markdown 内容被注入到这里 -->
-  <!-- ... -->
+<Image
+  class="border-border/60 w-full rounded-2xl border"
+  src={frontmatter.cover}
+  alt={frontmatter.title}
+/>
 
-</html>
+<hr class="border-border/60 my-8" />
+
+<slot />
+
+<ToTop />

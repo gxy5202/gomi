@@ -1,0 +1,64 @@
+---
+import Code from "@tabler/icons/outline/code.svg";
+import { Badge } from "@/components/starwind/badge";
+
+interface Project {
+  icon: string;
+  iconType: string;
+  name: string;
+  description: string;
+  url: string;
+  tags: string[];
+  badges?: string[];
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<a
+  href={project.url}
+  target="_blank"
+  rel="noreferrer"
+  class="glass card-hover flex h-full flex-col rounded-2xl p-5"
+>
+  <div class="mb-3 flex gap-4">
+    <div class="shrink-0">
+      {
+        project.iconType === "img" ? (
+          <img
+            src={project.icon}
+            alt={project.name}
+            width="32"
+            height="32"
+            class="size-8 rounded-lg object-contain"
+            loading="lazy"
+          />
+        ) : (
+          <div class="bg-chrome flex size-8 items-center justify-center rounded-lg">
+            <Code class="text-primary-foreground size-5" />
+          </div>
+        )
+      }
+    </div>
+    <div class="min-w-0 flex-1">
+      <h3 class="text-foreground mb-1 text-base font-semibold">
+        {project.name}
+      </h3>
+      <p class="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
+        {project.description}
+      </p>
+    </div>
+  </div>
+  <div class="border-border/60 mt-auto flex flex-wrap items-center gap-2 border-t pt-3">
+    {project.tags?.map((tag) => <Badge variant="outline" size="sm">{tag}</Badge>)}
+    {
+      project.badges?.map((badgeUrl) => (
+        <img src={badgeUrl} alt="badge" class="h-5" loading="lazy" />
+      ))
+    }
+  </div>
+</a>
